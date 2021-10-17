@@ -11,7 +11,6 @@ cron "54 59 7,9,11,13,15 * * *" script-path=https://gitee.com/lxk0301/jd_scripts
 
  */
 const $ = new Env('京东极速版抢券9.9减5优惠券');
-const moment = require('moment');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -76,7 +75,6 @@ function exchange() {
           console.log(`${JSON.stringify(err)}`)
           console.log(`${$.name} user/exchange/bean API请求失败，请检查网路重试\n`)
         } else {
-          console.log(moment().format("YYYY-MM-DD HH:mm:ss.SSS"));
           console.log(data);
           if (safeGet(data)) {
             data = JSON.parse(data);
@@ -115,52 +113,6 @@ function taskUrl(function_id, body = {}) {
     },
     body: "body=%7B%22activityId%22%3A%22vN4YuYXS1mPse7yeVPRq4TNvCMR%22%2C%22scene%22%3A%221%22%2C%22args%22%3A%22key%3D7AE6994C328EB1C89CDB0221057BF411BD41956D70584237E1E4C232A0F444F7AB710999388695EC3FD474AA9F388E18_babel%2CroleId%3DFCF48ACDE201EF458A74ED8840CC1D01_babel%2CstrengthenKey%3D281033DADF9F63C5ED2419FA001BEB0EFA083B6E82C395456F9A70404998DD093CF966D9FC18C018C985EAE1FC2950BB_babel%22%2C%22platform%22%3A%221%22%2C%22orgType%22%3A%222%22%2C%22openId%22%3A%22-1%22%2C%22pageClickKey%22%3A%22-1%22%2C%22eid%22%3A%222K2R5LUAOZLJEGUOKOLKJESKGW3PNC4WENTZX5J3AD5DGPJ43PVTJAKCCDGRSW4T4L3TEYIMPXYCCZLESFIBSEINQU%22%2C%22fp%22%3A%2261d959349226e7ee149a5f072ce441ce%22%2C%22shshshfp%22%3A%2267655c83f23930c629bab2db937b7280%22%2C%22shshshfpa%22%3A%2251ffb3d7-f639-517a-db55-de017de82f24-1593939396%22%2C%22shshshfpb%22%3A%22pXq9bWYgnr90io6zFeE2x5g%3D%3D%22%2C%22childActivityUrl%22%3A%22https%253A%252F%252Fpro.m.jd.com%252Fjdlite%252Factive%252FvN4YuYXS1mPse7yeVPRq4TNvCMR%252Findex.html%253Fcu%253Dtrue%2526utm_campaign%253D%2526utm_source%253Dkong%2526utm_medium%253Dtuiguang%2526utm_campaign%253Dt_1000894247_%2526utm_term%253D45e0b7dae97949c19f6bc969038e3e45%2526__in_task_view__%253DjdLiteiOS%2526lng%253D116.451824%2526lat%253D25.666942%2526sid%253D95a5fe671611a812fd5a449a8d4a5aew%2526un_area%253D16_1362_1365_45002%22%2C%22userArea%22%3A%22-1%22%2C%22client%22%3A%22-1%22%2C%22clientVersion%22%3A%22-1%22%2C%22uuid%22%3A%22-1%22%2C%22osVersion%22%3A%22-1%22%2C%22brand%22%3A%22-1%22%2C%22model%22%3A%22-1%22%2C%22networkType%22%3A%22-1%22%2C%22jda%22%3A%2271854095.15939393960041822512964.1593939396.1633405782.1633406272.504%22%2C%22sdkToken%22%3A%22%22%2C%22token%22%3A%22VG4FYG3X3W5FR3CKQVMKY5QDTUGUR2BLX4RZ5PMZCV73KF5MMLP7AFTXBW2A2IDC5LWOPJHY75TDS%22%2C%22jstub%22%3A%22SNNPV27VVJNHMFSOQLVGXMHSY2OSNOFRC77234TQLB4UUR7JVZDZRCCP3XQGNYUFGKTIBLBXAYIFFFVLVMFOEAOO23WKYXJ75PFQZVA%22%2C%22pageClick%22%3A%22Babel_Coupon%22%2C%22couponSource%22%3A%22manual%22%2C%22couponSourceDetail%22%3A%22-100%22%2C%22channel%22%3A%22%E9%80%9A%E5%A4%A9%E5%A1%94%E4%BC%9A%E5%9C%BA%22%2C%22la%22%3A%22605715ec560d6508f7403b91b677d79c%22%2C%22lb%22%3A%22605715ec560d6508f7403b91b677d79c%22%2C%22mitemAddrId%22%3A%22%22%2C%22geo%22%3A%7B%22lng%22%3A%22116.451824%22%2C%22lat%22%3A%2225.666942%22%7D%2C%22addressId%22%3A%222274330971%22%2C%22posLng%22%3A%22116.420707%22%2C%22posLat%22%3A%2225.646321%22%2C%22homeLng%22%3A%22%22%2C%22homeLat%22%3A%22%22%2C%22focus%22%3A%22%22%2C%22innerAnchor%22%3A%22%22%2C%22cv%22%3A%222.0%22%7D&screen=750*1334&client=wh5&clientVersion=1.0.0&sid=95a5fe671611a812fd5a449a8d4a5aew&uuid=15939393960041822512964.718.1633407440658&area=16_1362_1365_45002"
   }
-}
-
-
-function TotalBean() {
-  return new Promise(async resolve => {
-    const options = {
-      "url": `https://wq.jd.com/user/info/QueryJDUserInfo?sceneval=2`,
-      "headers": {
-        "Accept": "application/json,text/plain, */*",
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Accept-Language": "zh-cn",
-        "Connection": "keep-alive",
-        "Cookie": cookie,
-        "Referer": "https://wqs.jd.com/my/jingdou/my.shtml?sceneval=2",
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
-      }
-    }
-    $.post(options, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data);
-            if (data['retcode'] === 13) {
-              $.isLogin = false; //cookie过期
-              return
-            }
-            if (data['retcode'] === 0) {
-              $.nickName = (data['base'] && data['base'].nickname) || $.UserName;
-            } else {
-              $.nickName = $.UserName
-            }
-          } else {
-            console.log(`京东服务器返回空数据`)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
 }
 
 function safeGet(data) {
