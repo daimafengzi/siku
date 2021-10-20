@@ -139,13 +139,8 @@ function exchange() {
 							  }
 							})
 							//测试开启签到结束		
-													}
+					}
 				}
-			} catch (e) {
-				$.logErr(e, resp)
-			}
-			finally {
-				resolve();
 			}
 		}
 		//这里写签到数据
