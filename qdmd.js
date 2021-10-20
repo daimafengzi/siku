@@ -132,15 +132,15 @@ function exchange() {
 										}
 								  }
 								}
-							  } catch (e) {
-								$.logErr(e, resp)
-							  } finally {
-								resolve();
 							  }
 							})
 							//测试开启签到结束		
+													}
+					} else {
+						console.log(`京东服务器返回空数据`)
 					}
-				} catch (e) {
+				}
+			} catch (e) {
 				$.logErr(e, resp)
 			}
 			finally {
