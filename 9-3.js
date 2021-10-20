@@ -65,7 +65,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action?';
 
 async function price() {
   await exchange();
-  await showMsg();
+  await showMsg()
 }
 
 function exchange() {
