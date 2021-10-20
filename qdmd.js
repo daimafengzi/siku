@@ -132,6 +132,10 @@ function exchange() {
 										}
 								  }
 								}
+							  } catch (e) {
+								$.logErr(e, resp)
+							  } finally {
+								resolve();
 							  }
 							})
 							//测试开启签到结束		
