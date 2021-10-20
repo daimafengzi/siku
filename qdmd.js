@@ -126,12 +126,6 @@ function exchange() {
 									console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 日志结果：${JSON.stringify(data)}\n\n\n`);
 								  }
 								}
-							  } catch (e) {
-								$.logErr(e, resp)
-							  } finally {
-								resolve();
-							  }
-							})
 							//通知开始
 							var str="{"+data+"}";
 							if(str.indexOf('"success":true') !=-1){
@@ -140,6 +134,12 @@ function exchange() {
 								message += `需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}\n\n\n`
 							}
 							//通知结束
+							  } catch (e) {
+								$.logErr(e, resp)
+							  } finally {
+								resolve();
+							  }
+							})
 													}
 					} else {
 						console.log(`京东服务器返回空数据\n`)
