@@ -123,13 +123,7 @@ function exchange() {
 								  if (safeGet(data)) {
 									data = JSON.parse(data);
 									//console.log(optionss.body);//输出body看看获取的orderId是否正确
-									console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
-									var str="{"+data+"}";
-									if(str.indexOf('"success":true') !=-1){
-										message += `京东账号  ${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：签到成功，请手动查看！\n`
-										}else{
-										message += `京东账号  ${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}\n`
-										}
+									console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n\n\n`);
 								  }
 								}
 							  } catch (e) {
@@ -138,7 +132,14 @@ function exchange() {
 								resolve();
 							  }
 							})
-							//测试开启签到结束		
+							//通知开始
+							var str="{"+data+"}";
+							if(str.indexOf('"success":true') !=-1){
+								message += `京东账号  ${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：签到成功，请手动查看！\n\n\n`
+								}else{
+								message += `京东账号  ${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}\n\n\n`
+							}
+							//通知结束
 													}
 					} else {
 						console.log(`京东服务器返回空数据\n`)
