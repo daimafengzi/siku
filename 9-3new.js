@@ -39,7 +39,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action?';
         $.isLogin = true;
         $.nickName = '';
         message = '';
-		//await TotalBean();
+		await TotalBean();
 		console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
 		if (!$.isLogin) {
 			$.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
@@ -49,7 +49,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action?';
 			}
 			continue
 		  }
-		  await exchange();
+		  await price();
 		}
 	  }
 	  if (allMessage) {
@@ -62,6 +62,11 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action?';
   .finally(() => {
     $.done();
   })
+
+async function price() {
+  await exchange();
+  await showMsg();
+}
 
 function exchange() {
   return new Promise(resolve => {
@@ -93,7 +98,6 @@ function exchange() {
       }
     })
   })
-  await showMsg();
 }
 
 function taskUrl(function_id, body = {}) {
