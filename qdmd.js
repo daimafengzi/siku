@@ -123,7 +123,7 @@ function exchange() {
 								  if (safeGet(data)) {
 									data = JSON.parse(data);
 									//console.log(optionss.body);//输出body看看获取的orderId是否正确
-									console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n\n\n`);
+									console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 日志结果：${JSON.stringify(data)}\n\n\n`);
 								  }
 								}
 							  } catch (e) {
