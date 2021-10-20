@@ -50,7 +50,6 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action?';
         continue
       }
       await price()
-      await $.wait(2000)
     }
   }
   if (allMessage) {
@@ -63,6 +62,11 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action?';
   .finally(() => {
     $.done();
   })
+
+async function price() {
+  await exchange();
+  await showMsg();
+}
 
 function exchange() {
 	return new Promise(async resolve => {
