@@ -36,7 +36,7 @@ let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
       if (cookiesArr[i]) {
         cookie = cookiesArr[i];
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-        //$.index = i + 1;
+        $.index = i + 1;
         console.log(`*********京东账号${$.index}】${$.nickName || $.UserName}*********`)
         $.isLogin = true;
         $.nickName = '';
@@ -123,9 +123,9 @@ function TotalBean() {
 									console.log(`京东账号  ${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
 									var str="{"+data+"}";
 									if(str.indexOf('"success":true') !=-1){
-										notify.sendNotify($.name, `京东账号  ${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：`+"签到成功，请手动查看！");
+										notify.sendNotify($.name, `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：`+"签到成功，请手动查看！");
 										}else{
-										notify.sendNotify($.name, `京东账号  ${$.nickName || $.UserName}\n${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}`);
+										notify.sendNotify($.name, `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}`);
 										}
 								  }
 								}
@@ -137,7 +137,6 @@ function TotalBean() {
 							})
 							//测试开启签到结束		
 													}
-							$.index = i + 1;
 						if (data['retcode'] === 13) {
 							$.isLogin = false; //cookie过期
 							return
