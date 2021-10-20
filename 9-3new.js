@@ -80,6 +80,8 @@ function exchange() {
 			if(str.indexOf('领取成功') !=-1){
 				//notify.sendNotify($.name, `京东账号  ${$.nickName || $.UserName}\n【测试新版京东极速版9.9减3优惠券结果】${JSON.stringify(data.subCodeMsg)}`);
 				message += `京东账号  ${$.nickName || $.UserName}\n【测试新版京东极速版9.9减3优惠券结果】${JSON.stringify(data.subCodeMsg)}`
+				}else{
+				message += `京东账号  ${$.nickName || $.UserName}\n【测试新版京东极速版9.9减3优惠券结果】${JSON.stringify(data.subCodeMsg)}`
 				}
 			//自行添加通知项目结束
           }
