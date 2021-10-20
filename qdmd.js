@@ -133,11 +133,12 @@ function exchange() {
 							  }
 							})
 							//通知开始
+							data = JSON.parse(data);
 							var str="{"+data+"}";
 							if(str.indexOf('"success":true') !=-1){
-								message += `京东账号  ${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：签到成功，请手动查看！\n\n\n`
+								message += ` 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：签到成功，请手动查看！\n\n\n`
 								}else{
-								message += `京东账号  ${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}\n\n\n`
+								message += `需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}\n\n\n`
 							}
 							//通知结束
 													}
