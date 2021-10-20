@@ -68,6 +68,16 @@ async function price() {
   await showMsg()
 }
 
+function showMsg() {
+  return new Promise(resolve => {
+    if (message) {
+      allMessage += `【京东账号${$.index}】${$.nickName || $.UserName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : '\n\n'}`;
+    }
+    $.msg($.name, '', `【京东账号${$.index}】${$.nickName}\n${message}`);
+    resolve()
+  })
+}
+
 function exchange() {
 	return new Promise(async resolve => {
 		const options = {
@@ -207,16 +217,6 @@ function TotalBean() {
         resolve();
       }
     })
-  })
-}
-
-function showMsg() {
-  return new Promise(resolve => {
-    if (message) {
-      allMessage += `【京东账号${$.index}】${$.nickName || $.UserName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : '\n\n'}`;
-    }
-    $.msg($.name, '', `【京东账号${$.index}】${$.nickName}\n${message}`);
-    resolve()
   })
 }
 
