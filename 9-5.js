@@ -83,7 +83,7 @@ function exchange() {
 			//自行添加通知项目开始
 			var str="{"+data.subCodeMsg+"}";
 			if(str.indexOf('领取成功') !=-1){
-				message += `京东账号  ${$.nickName || $.UserName}\n【京东极速版9.9减5优惠券】${JSON.stringify(data.subCodeMsg)}`
+				message += `京东账号  ${$.nickName || $.UserName}\n【京东极速版9.9减5优惠券】${JSON.stringify(data.subCodeMsg)}\n`
 				}
 			//自行添加通知项目结束
           }

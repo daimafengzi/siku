@@ -144,6 +144,11 @@ function exchange() {
 						console.log(`京东服务器返回空数据\n`)
 					}
 				}
+			} catch (e) {
+				$.logErr(e, resp)
+			}
+			finally {
+				resolve();
 			}
 		})
 	})
