@@ -140,18 +140,6 @@ function exchange() {
 							})
 							//测试开启签到结束		
 													}
-						if (data['retcode'] === 13) {
-							$.isLogin = false; //cookie过期
-							return
-						}
-						if (data['retcode'] === 0) {
-							$.nickName = (data['base'] && data['base'].nickname) || $.UserName;
-						} else {
-							$.nickName = $.UserName
-						}
-					} else {
-						console.log(`京东服务器返回空数据`)
-					}
 				}
 			} catch (e) {
 				$.logErr(e, resp)
