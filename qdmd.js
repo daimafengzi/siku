@@ -36,7 +36,7 @@ let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
       if (cookiesArr[i]) {
         cookie = cookiesArr[i];
         $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-        $.index = i + 1;
+        //$.index = i + 1;
         console.log(`*********京东账号${$.index}】${$.nickName || $.UserName}*********`)
         $.isLogin = true;
         $.nickName = '';
@@ -137,6 +137,7 @@ function TotalBean() {
 							})
 							//测试开启签到结束		
 													}
+							$.index = i + 1;
 						if (data['retcode'] === 13) {
 							$.isLogin = false; //cookie过期
 							return
