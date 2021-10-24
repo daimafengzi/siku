@@ -141,7 +141,7 @@ function showMsg() {
   })
 }
 
-function taskUrl() {
+await function taskUrl() {
   console.log('您好， 到我说话了！');
 }
 
