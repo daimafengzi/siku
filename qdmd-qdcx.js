@@ -90,10 +90,11 @@ async function jstoken() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
+			console.log(data);//打印出需要签到的物品详情--完全。
 			data = JSON.stringify(data.data.signFreeOrderInfoList);
 			//console.log(data);//打印出需要签到的物品详情。
 			data = JSON.parse(data);
-			console.log(data);//打印出需要签到的物品详情--完全。
+			console.log(data);//打印出需要签到的物品详情。
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
 			console.log(obj1[cishu].orderId);
