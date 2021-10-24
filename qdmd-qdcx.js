@@ -67,10 +67,6 @@ async function price() {
 	await showMsg();
 }
 
-async function asd() {
-	await taskUrl();
-}
-
 async function jstoken() {
 	return new Promise(async resolve => {
 		const options = {
@@ -104,7 +100,7 @@ async function jstoken() {
 			var qiandaozhuangtai=obj1[cishu].combination
 			if(qiandaozhuangtai=="3"){
 			console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
-			await asd()
+			await taskUrl()
 			}else{
 				if(qiandaozhuangtai=="2"){
 				console.log([obj1[cishu].productName]+"，今日已经签到过无需再次签到");
@@ -146,7 +142,9 @@ function showMsg() {
 }
 
 function taskUrl() {
-  console.log('您好， 到我说话了！');
+	return new Promise(resolve => {
+	console.log('您好， 到我说话了！');
+	})
 }
 
 
