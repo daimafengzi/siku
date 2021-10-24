@@ -100,11 +100,12 @@ async function jstoken() {
 			var qiandaozhuangtai=obj1[cishu].combination
 			if(qiandaozhuangtai=="3"){
 			console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
+			await taskUrl()
 			}else{
 				if(qiandaozhuangtai=="2"){
-				console.log([obj1[cishu].productName]+"今日已经签到过无需签到");
+				console.log([obj1[cishu].productName]+"，今日已经签到过无需再次签到");
 				}else{
-				console.log([obj1[cishu].productName]+"新购买物品，今日无法签到");
+				console.log([obj1[cishu].productName]+"，新购买物品，今日无法签到");
 				}
 			}
 			//测试获取未签到的数据
@@ -140,22 +141,8 @@ function showMsg() {
   })
 }
 
-function taskUrl(functionId, body) {
-  return {
-    url: `${JD_API_HOST}api?appid=siteppM&functionId=${functionId}&forcebot=&t=${Date.now()}`,
-    body: `body=${encodeURIComponent(JSON.stringify(body))}`,
-    headers: {
-      "Host": "api.m.jd.com",
-      "Accept": "application/json",
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Origin": "https://msitepp-fm.jd.com",
-      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-      "Referer": "https://msitepp-fm.jd.com/",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Cookie": cookie
-    }
-  }
+function taskUrl() {
+  console.log('您好， 到我说话了！');
 }
 
 
