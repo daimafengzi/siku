@@ -10,7 +10,8 @@ const $ = new Env('签到免单新版重写');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-var obj1 = '';  
+var obj1 = '';//定义签到物品数组
+let cishu= 0;//定义签到次数
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, allMessage = '';
 if ($.isNode()) {
@@ -90,10 +91,15 @@ async function jstoken() {
           if (safeGet(data)) {
             data = JSON.parse(data);
 			data = JSON.stringify(data.data.signFreeOrderInfoList);
-			console.log(data);//打印出需要签到的物品详情。
+			//console.log(data);//打印出需要签到的物品详情。
 			data = JSON.parse(data);
-			//console.log(data);
+			console.log(data);//打印出需要签到的物品详情--完全。
 			var obj1 = eval(data);
+			for (cishu = 0; cishu < obj1.length; cishu++) {
+			console.log(obj1[0].orderId);
+			console.log(obj1[1].orderId);
+			console.log(obj1[2].orderId);
+			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
               return;
