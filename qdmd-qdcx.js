@@ -64,7 +64,6 @@ const JD_API_HOST = 'https://api.m.jd.com/';
 
 async function price() {
 	await jstoken();
-	await taskUrl();
 	await showMsg();
 }
 
@@ -97,6 +96,8 @@ async function jstoken() {
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
 			console.log(obj1[cishu].orderId);
+			console.log(obj1[cishu].combination=3);
+			console.log(`\n`);
 			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
@@ -128,11 +129,7 @@ function showMsg() {
   })
 }
 
-function taskUrl() {
-	console.log(obj1[cishu].orderId);
-	console.log(obj1[cishu].combination=3);
-	console.log(`\n`);
-}//最后的大括号
+
 
 function TotalBean() {
   return new Promise(async resolve => {
