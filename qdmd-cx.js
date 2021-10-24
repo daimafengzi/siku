@@ -165,7 +165,7 @@ function taskUrl() {
       } finally {
         resolve(data)
       }
-    }//$.post(), (err, resp, data)
+    })//$.post(), (err, resp, data)
 	})//return new Promise(async resolve => {
 }//最后的大括号
 
