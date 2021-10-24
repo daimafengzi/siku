@@ -63,7 +63,8 @@ const JD_API_HOST = 'https://api.m.jd.com/';
 
 async function price() {
 	for(var i=0;i<obj1.length;i++){
-				await jstoken();
+		await jstoken();
+		console.log("11");
 	}
 	await showMsg();
 }
