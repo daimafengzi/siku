@@ -1,17 +1,16 @@
 /*
 签到免单新版重写
-
 活动地址：https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=116.451748&lat=25.667077&sid=538d4cff455fbcd0a48217f9612cca1w&un_area=16_1362_1365_45002&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=Qqfriends&ad_od=share&utm_user=plusmember
 ================Loon==============
 [Script]
-cron "3 1-23/6 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=签到免单新版重写
+cron "41 0,12,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=签到免单新版重写
 
  */
 const $ = new Env('签到免单新版重写');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-var obj1 = '';
+var obj1 = '';  
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, allMessage = '';
 if ($.isNode()) {
@@ -65,20 +64,131 @@ const JD_API_HOST = 'https://api.m.jd.com/';
 async function price() {
   let num = 0
   do {
-    await tiqudingdan();
-    //if ($.obj1) {
-      //await siteppM_skuOnceApply();
-	  console.log('真操蛋');
-    //}
-    //num++
-  //} while (num < 3 && !$.obj1)
+    await jstoken();
+    if ($.token) {
+      await siteppM_skuOnceApply();
+    }
+    num++
+  } while (num < 3 && !$.token)
   await showMsg()
 }
 
-function tiqudingdan() {
-	console.log('定义成功');
-}	//最大结束标签
+async function siteppM_skuOnceApply() {
+  let body = {
+    sid: "",
+    type: "3",
+    forcebot: "",
+    token: $.token,
+    feSt: "s"
+  }
+  return new Promise(async resolve => {
+    $.post(taskUrl("siteppM_skuOnceApply", body), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(JSON.stringify(err))
+          console.log(`${$.name} siteppM_skuOnceApply API请求失败，请检查网路重试`);
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data)
+            if (data.flag) {
+              await $.wait(20 * 1000)
+              await siteppM_appliedSuccAmount()
+            } else {
+              console.log(`保价失败：${data.responseMessage}`)
+              message += `保价失败：${data.responseMessage}\n`
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
+function siteppM_appliedSuccAmount() {
+  let body = {
+    sid: "",
+    type: "3",
+    forcebot: "",
+    num: 15
+  }
+  return new Promise(resolve => {
+    $.post(taskUrl("siteppM_appliedSuccAmount", body), (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(JSON.stringify(err))
+          console.log(`${$.name} siteppM_appliedSuccAmount API请求失败，请检查网路重试`)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data)
+            if (data.flag) {
+              console.log(`保价成功：返还${data.succAmount}元`)
+              message += `保价成功：返还${data.succAmount}元\n`
+            } else {
+              console.log(`保价失败：没有可保价的订单`)
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data)
+      }
+    })
+  })
+}
 
+async function jstoken() {
+	return new Promise(async resolve => {
+		const options = {
+			"url": `https://api.m.jd.com/?functionId=signFreeHome&body={%22linkId%22:%22PiuLvM8vamONsWzC0wqBGQ%22}&t=1634366231525&appid=activities_platform&client=H5&clientVersion=1.0.0&h5st=20211016143711647%3B6757289765640134%3B9cca1%3Btk02w78391b3018nByl3hGPr3zJ9B2F5PFAnWb8e%2BIfxQMYHnNuDG%2FWhFWH4xcExN7Nt2p1u7Vg4fTapGXcFn3iRDvV9%3B0dce837abd9e94a960d8fdcb4d82d9958f6692dc9892c8f75273ab53f0ab2729%3B3.0%3B1634366231647`,
+			"headers": {
+				"Accept": "application/json,text/plain, */*",
+				"Content-Type": "application/x-www-form-urlencoded",
+				"Accept-Encoding": "gzip, deflate, br",
+				"Accept-Language": "zh-cn",
+				"Connection": "keep-alive",
+				"Cookie": cookie,
+				"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=3347d4988324d948d7e998cb7b7cdbbw&un_area=16_1362_44319_55501",
+				"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+			}
+		}
+	$.get(options, (err, resp, data) => {
+      try {
+        if (err) {
+          $.logErr(err)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data);
+			data = JSON.stringify(data.data.signFreeOrderInfoList);
+			//console.log(data);//打印出需要签到的物品详情。
+			data = JSON.parse(data);
+			//console.log(data);
+			var obj1 = eval(data);  
+			console.log(obj1[0].orderId);
+			console.log(obj1[1].orderId);
+			console.log(obj1[2].orderId);
+            if (data['retcode'] === 1001) {
+              $.isLogin = false; //cookie过期
+              return;
+            }
+            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
+              $.nickName = data.data.userInfo.baseInfo.nickname;
+            }
+          } else {
+            console.log('京东服务器返回空数据');
+          }
+        }
+      } catch (e) {
+        $.logErr(e)
+      } finally {
+        resolve();
+      }
+    })//$.get(options, (err, resp, data) => {
+	})//return new Promise(async resolve => {
+}//最后的大括号
 
 function showMsg() {
   return new Promise(resolve => {
@@ -90,6 +200,23 @@ function showMsg() {
   })
 }
 
+function taskUrl(functionId, body) {
+  return {
+    url: `${JD_API_HOST}api?appid=siteppM&functionId=${functionId}&forcebot=&t=${Date.now()}`,
+    body: `body=${encodeURIComponent(JSON.stringify(body))}`,
+    headers: {
+      "Host": "api.m.jd.com",
+      "Accept": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Origin": "https://msitepp-fm.jd.com",
+      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      "Referer": "https://msitepp-fm.jd.com/",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Cookie": cookie
+    }
+  }
+}
 
 function TotalBean() {
   return new Promise(async resolve => {
