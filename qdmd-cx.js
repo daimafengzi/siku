@@ -120,6 +120,7 @@ function tiqudingdan() {
         resolve();
       }
     })
+	})
 }	//最大结束标签
 
 
