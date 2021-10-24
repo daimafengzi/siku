@@ -98,10 +98,14 @@ async function jstoken() {
 			console.log(obj1[cishu].combination);
 			//测试获取未签到的数据
 			var qiandaozhuangtai=obj1[cishu].combination
-			if(qiandaozhuangtai=="2"){
+			if(qiandaozhuangtai=="3"){
 			console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
 			}else{
-			console.log("签到过了还签到？");
+				if(qiandaozhuangtai=="2"){
+				console.log([obj1[cishu].productName]+"今日已经签到过无需签到");
+				}else{
+				console.log([obj1[cishu].productName]+"新购买物品，今日无法签到");
+				}
 			}
 			//测试获取未签到的数据
 
