@@ -91,7 +91,7 @@ async function jstoken() {
           if (safeGet(data)) {
             data = JSON.parse(data);
 			console.log(data);//打印出需要签到的物品详情--完全。
-			data = JSON.stringify(data.data.signFreeOrderInfoList);
+			data = JSON.stringify(data.data.result);
 			//console.log(data);//打印出需要签到的物品详情。
 			data = JSON.parse(data);
 			console.log(data);//打印出需要签到的物品详情。
