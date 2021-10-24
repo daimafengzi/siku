@@ -98,7 +98,6 @@ async function jstoken() {
 			console.log(`次数：`+cishu);
 			console.log(`ID：`+obj1[cishu].orderId);
 			console.log(`状态：`+obj1[cishu].combination);
-				}
 
 			}
             if (data['retcode'] === 1001) {
