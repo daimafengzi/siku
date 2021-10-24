@@ -65,7 +65,7 @@ async function price() {
 	for(var i=0;i<obj1.length;i++){
 				await jstoken();
 	}
-	await showMsg()
+	await showMsg();
 }
 
 async function jstoken() {
@@ -162,7 +162,7 @@ function taskUrl() {
       } finally {
         resolve(data)
       }
-    })
+    }
 	})//return new Promise(async resolve => {
 }//最后的大括号
 
