@@ -69,7 +69,7 @@ async function price() {
       console.log('操蛋');
     }
     num++
-  } while (num < 3 && !$.token)
+  } while (num < 3 && !$.obj1)
   await showMsg()
 }
 
