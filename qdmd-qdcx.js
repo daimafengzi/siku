@@ -95,9 +95,15 @@ async function jstoken() {
 			console.log(data);//打印出需要签到的物品详情。
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
-			console.log(`次数：`+cishu);
-			console.log(`ID：`+obj1[cishu].orderId);
-			console.log(`状态：`+obj1[cishu].combination);
+			//测试获取未签到的数据
+			var obj2 = {
+						orderId:obj1[cishu].orderId,
+						combination:obj1[cishu].combination,
+						};
+			for(var key in obj1[cishu]){
+				console.log(obj1[key]);
+			}
+			//测试获取未签到的数据
 
 			}
             if (data['retcode'] === 1001) {
