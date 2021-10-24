@@ -170,7 +170,7 @@ function taskUrl() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data)
-			console.log(`${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：${JSON.stringify(data)}\n`
+			console.log(`${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
             if(str.indexOf('"success":true') !=-1){
 				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：签到成功，请手动查看！\n`
 			}
