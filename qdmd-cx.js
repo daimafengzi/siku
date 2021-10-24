@@ -62,10 +62,8 @@ const JD_API_HOST = 'https://api.m.jd.com/';
   })
 
 async function price() {
-	for(var i=0;i<obj1.length;i++){
-		await jstoken();
-		console.log("11");
-	}
+	await jstoken();
+	await taskUrl();
 	await showMsg();
 }
 
@@ -92,7 +90,7 @@ async function jstoken() {
           if (safeGet(data)) {
             data = JSON.parse(data);
 			data = JSON.stringify(data.data.signFreeOrderInfoList);
-			//console.log(data);//打印出需要签到的物品详情。
+			console.log(data);//打印出需要签到的物品详情。
 			data = JSON.parse(data);
 			//console.log(data);
 			var obj1 = eval(data);
@@ -152,9 +150,9 @@ function taskUrl() {
             data = JSON.parse(data)
 			console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
             if(str.indexOf('"success":true') !=-1){
-				message += `京东账号  ${$.index}】${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：签到成功，请手动查看！`
+				message += `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：签到成功，请手动查看！`
 			}else{
-				message +=  `京东账号  ${$.index}】${$.nickName || $.UserName}\n${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}`
+				message += `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}`
 			}
           }
         }
