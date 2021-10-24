@@ -92,10 +92,11 @@ async function jstoken() {
 			//console.log(data);//打印出需要签到的物品详情。
 			data = JSON.parse(data);
 			//console.log(data);
-			var obj1 = eval(data);  
-			//console.log(obj1[0].orderId);
-			//console.log(obj1[1].orderId);
-			//console.log(obj1[2].orderId);
+			var obj1 = eval(data);
+			var arr = obj1.split(" ");
+			for(var i=0;i<arr.length;i++){
+				console.log(obj1[arr].orderId);
+			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
               return;
