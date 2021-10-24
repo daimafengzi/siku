@@ -65,79 +65,12 @@ async function price() {
   let num = 0
   do {
     await jstoken();
-    if ($.token) {
-      await siteppM_skuOnceApply();
+    if ($.obj1) {
+      console.log('操蛋');
     }
     num++
   } while (num < 3 && !$.token)
   await showMsg()
-}
-
-async function siteppM_skuOnceApply() {
-  let body = {
-    sid: "",
-    type: "3",
-    forcebot: "",
-    token: $.token,
-    feSt: "s"
-  }
-  return new Promise(async resolve => {
-    $.post(taskUrl("siteppM_skuOnceApply", body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} siteppM_skuOnceApply API请求失败，请检查网路重试`);
-        } else {
-          if (safeGet(data)) {
-            data = JSON.parse(data)
-            if (data.flag) {
-              await $.wait(20 * 1000)
-              await siteppM_appliedSuccAmount()
-            } else {
-              console.log(`保价失败：${data.responseMessage}`)
-              message += `保价失败：${data.responseMessage}\n`
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp);
-      } finally {
-        resolve(data);
-      }
-    })
-  })
-}
-function siteppM_appliedSuccAmount() {
-  let body = {
-    sid: "",
-    type: "3",
-    forcebot: "",
-    num: 15
-  }
-  return new Promise(resolve => {
-    $.post(taskUrl("siteppM_appliedSuccAmount", body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} siteppM_appliedSuccAmount API请求失败，请检查网路重试`)
-        } else {
-          if (safeGet(data)) {
-            data = JSON.parse(data)
-            if (data.flag) {
-              console.log(`保价成功：返还${data.succAmount}元`)
-              message += `保价成功：返还${data.succAmount}元\n`
-            } else {
-              console.log(`保价失败：没有可保价的订单`)
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data)
-      }
-    })
-  })
 }
 
 async function jstoken() {
