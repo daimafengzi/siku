@@ -4,7 +4,7 @@
 活动地址：https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=116.451748&lat=25.667077&sid=538d4cff455fbcd0a48217f9612cca1w&un_area=16_1362_1365_45002&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=Qqfriends&ad_od=share&utm_user=plusmember
 ================Loon==============
 [Script]
-cron "41 0,12,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=签到免单新版重写
+cron "3 1-23/6 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=签到免单新版重写
 
  */
 const $ = new Env('签到免单新版重写');
@@ -66,12 +66,12 @@ async function price() {
   let num = 0
   do {
     await tiqudingdan();
-    if ($.obj1) {
+    //if ($.obj1) {
       //await siteppM_skuOnceApply();
 	  console.log('真操蛋');
-    }
-    num++
-  } while (num < 3 && !$.obj1)
+    //}
+    //num++
+  //} while (num < 3 && !$.obj1)
   await showMsg()
 }
 
