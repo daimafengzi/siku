@@ -64,14 +64,14 @@ const JD_API_HOST = 'https://api.m.jd.com/';
 
 async function price() {
 	await jstoken();
-	//await taskUrl();
+	await taskUrl();
 	await showMsg();
 }
 
 async function jstoken() {
 	return new Promise(async resolve => {
 		const options = {
-			"url": `https://api.m.jd.com/?functionId=signFreeSignList&body={%22linkId%22:%22PiuLvM8vamONsWzC0wqBGQ%22,%22pageNum%22:1,%22pageSize%22:10}&t=1635091933458&appid=activities_platform&client=H5&clientVersion=1.0.0`,
+			"url": `https://api.m.jd.com/?functionId=signFreeHome&body={%22linkId%22:%22PiuLvM8vamONsWzC0wqBGQ%22}&t=1634366231525&appid=activities_platform&client=H5&clientVersion=1.0.0&h5st=20211016143711647%3B6757289765640134%3B9cca1%3Btk02w78391b3018nByl3hGPr3zJ9B2F5PFAnWb8e%2BIfxQMYHnNuDG%2FWhFWH4xcExN7Nt2p1u7Vg4fTapGXcFn3iRDvV9%3B0dce837abd9e94a960d8fdcb4d82d9958f6692dc9892c8f75273ab53f0ab2729%3B3.0%3B1634366231647`,
 			"headers": {
 				"Accept": "application/json,text/plain, */*",
 				"Content-Type": "application/x-www-form-urlencoded",
@@ -79,7 +79,7 @@ async function jstoken() {
 				"Accept-Language": "zh-cn",
 				"Connection": "keep-alive",
 				"Cookie": cookie,
-				"Referer": "https://signfree.jd.com/order?activityId=PiuLvM8vamONsWzC0wqBGQ",
+				"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=3347d4988324d948d7e998cb7b7cdbbw&un_area=16_1362_44319_55501",
 				"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
 			}
 		}
@@ -92,7 +92,6 @@ async function jstoken() {
             data = JSON.parse(data);
 			console.log(data);//打印出需要签到的物品详情--完全。
 			data = JSON.stringify(data.data.result);
-			//console.log(data);//打印出需要签到的物品详情。
 			data = JSON.parse(data);
 			console.log(data);//打印出需要签到的物品详情。
 			var obj1 = eval(data);
@@ -130,44 +129,9 @@ function showMsg() {
 }
 
 function taskUrl() {
-	return new Promise(async resolve => {
-	const optionss = {
-		"url": `https://api.m.jd.com/`,
-		"headers": {
-		"Accept": "application/json,text/plain, */*",
-		"Content-Type": "application/x-www-form-urlencoded",
-		"Accept-Encoding": "gzip, deflate, br",
-		"Accept-Language": "zh-cn",
-		"Connection": "keep-alive",
-		"Cookie": cookie,
-		"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=3347d4988324d948d7e998cb7b7cdbbw&un_area=16_1362_44319_55501",
-		"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
-		},
-		body: "functionId=signFreeSignIn&body=%7B%22linkId%22%3A%22PiuLvM8vamONsWzC0wqBGQ%22%2C%22orderId%22%3A"+[obj1[i].orderId]+"%7D&t=1634355472032&appid=activities_platform&client=H5&clientVersion=1.0.0"
-		}
-    $.post(optionss, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} siteppM_appliedSuccAmount API请求失败，请检查网路重试`)
-        } else {
-          if (safeGet(data)) {
-            data = JSON.parse(data)
-			console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
-            if(str.indexOf('"success":true') !=-1){
-				message += `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：签到成功，请手动查看！`
-			}else{
-				message += `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}`
-			}
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data)
-      }
-    })//$.post(), (err, resp, data)
-	})//return new Promise(async resolve => {
+	console.log(obj1[cishu].orderId);
+	console.log(obj1[cishu].combination=3);
+	console.log(`\n`);
 }//最后的大括号
 
 function TotalBean() {
