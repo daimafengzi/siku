@@ -144,7 +144,7 @@ function taskUrl() {
 		},
 		body: "functionId=signFreeSignIn&body=%7B%22linkId%22%3A%22PiuLvM8vamONsWzC0wqBGQ%22%2C%22orderId%22%3A"+[obj1[i].orderId]+"%7D&t=1634355472032&appid=activities_platform&client=H5&clientVersion=1.0.0"
 		}
-    $.post(), (err, resp, data) => {
+    $.post(optionss, (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
@@ -165,7 +165,7 @@ function taskUrl() {
       } finally {
         resolve(data)
       }
-    })//$.post(), (err, resp, data)
+    }//$.post(), (err, resp, data)
 	})//return new Promise(async resolve => {
 }//最后的大括号
 
