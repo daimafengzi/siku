@@ -144,6 +144,7 @@ function showMsg() {
 
 function taskUrl() {
 	console.log('您好， 到我说话了！');
+	console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
 }
 
 
