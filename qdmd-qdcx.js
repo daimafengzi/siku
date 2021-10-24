@@ -92,7 +92,7 @@ async function jstoken() {
 			//console.log(data);//打印出需要签到的物品详情--完全。
 			data = JSON.stringify(data.data.signFreeOrderInfoList);
 			data = JSON.parse(data);
-			console.log(data);//打印出需要签到的物品详情。
+			//console.log(data);//打印出需要签到的物品详情。
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
 			console.log(obj1[cishu].combination);
@@ -144,7 +144,8 @@ function showMsg() {
 
 function taskUrl() {
 	console.log('您好， 到我说话了！');
-	console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
+	console.log(`${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n`);
+	console.log(qiandaoID);
 }
 
 
