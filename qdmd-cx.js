@@ -12,7 +12,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 var obj1 = {};//定义签到物品数组
 let cishu= 0;//定义签到次数
-var qiandaoID="";//定义签到ID
+let qiandaoID="";//定义签到ID
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, allMessage = '';
 if ($.isNode()) {
