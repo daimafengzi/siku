@@ -144,7 +144,6 @@ function showMsg() {
 
 function taskUrl() {
 	console.log('您好， 到我说话了！');
-	console.log(`${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n`);
 	console.log(qiandaoID);
 }
 
