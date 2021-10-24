@@ -120,8 +120,9 @@ function tiqudingdan() {
         resolve();
       }
     })
-		
-//最大结束标签}
+}	//最大结束标签
+
+
 function showMsg() {
   return new Promise(resolve => {
     if (message) {
