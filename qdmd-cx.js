@@ -12,7 +12,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 var obj1 = {};//定义签到物品数组
 let cishu= 0;//定义签到次数
-const qiandaoID="";//定义签到ID
+var qiandaoID="";//定义签到ID
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, allMessage = '';
 if ($.isNode()) {
@@ -107,10 +107,10 @@ async function jstoken() {
 			}else{
 				if(qiandaozhuangtai=="2"){
 				console.log([obj1[cishu].productName]+"，今日已经签到过无需再次签到");
-				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n  结果：今日已经签到过无需再次签到\n`
+				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n  结果：今日已经签到过无需再次签到\n\n\n\n`
 				}else{
 				console.log([obj1[cishu].productName]+"，新购买物品，今日无法签到");
-				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n  结果：新购买物品，今日无法签到\n`
+				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n  结果：新购买物品，今日无法签到\n\n\n\n`
 				}
 			}
 			//测试获取未签到的数据
@@ -170,9 +170,9 @@ function taskUrl() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data)
-			console.log(`${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
+			console.log(`${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：${JSON.stringify(data)}\n\n\n\n`);
             if(str.indexOf('"success":true') !=-1){
-				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：签到成功，请手动查看！\n`
+				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：签到成功，请手动查看！\n\n\n\n`
 			}
           }
         }
