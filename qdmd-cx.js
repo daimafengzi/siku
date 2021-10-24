@@ -76,51 +76,7 @@ async function price() {
 }
 
 function tiqudingdan() {
-	return new Promise(async resolve => {
-		const options = {
-			"url": `https://api.m.jd.com/?functionId=signFreeHome&body={%22linkId%22:%22PiuLvM8vamONsWzC0wqBGQ%22}&t=1634366231525&appid=activities_platform&client=H5&clientVersion=1.0.0&h5st=20211016143711647%3B6757289765640134%3B9cca1%3Btk02w78391b3018nByl3hGPr3zJ9B2F5PFAnWb8e%2BIfxQMYHnNuDG%2FWhFWH4xcExN7Nt2p1u7Vg4fTapGXcFn3iRDvV9%3B0dce837abd9e94a960d8fdcb4d82d9958f6692dc9892c8f75273ab53f0ab2729%3B3.0%3B1634366231647`,
-			"headers": {
-				"Accept": "application/json,text/plain, */*",
-				"Content-Type": "application/x-www-form-urlencoded",
-				"Accept-Encoding": "gzip, deflate, br",
-				"Accept-Language": "zh-cn",
-				"Connection": "keep-alive",
-				"Cookie": cookie,
-				"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=3347d4988324d948d7e998cb7b7cdbbw&un_area=16_1362_44319_55501",
-				"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
-			}
-		}
-	$.get(options, (err, resp, data) => {
-      try {
-        if (err) {
-          $.logErr(err)
-        } else {
-          if (safeGet(data)) {
-            data = JSON.parse(data);
-			data = JSON.stringify(data.data.signFreeOrderInfoList);
-			data = JSON.parse(data);
-			obj1 = eval(data);
-			console.log(obj1[0].orderId);
-			console.log(obj1[1].orderId);
-			console.log(obj1[2].orderId);
-            if (data['retcode'] === 1001) {
-              $.isLogin = false; //cookie过期
-              return;
-            }
-            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
-              $.nickName = data.data.userInfo.baseInfo.nickname;
-            }
-          } else {
-            console.log('京东服务器返回空数据');
-          }
-        }
-      } catch (e) {
-        $.logErr(e)
-      } finally {
-        resolve();
-      }
-    })
-	})
+	console.log('定义成功');
 }	//最大结束标签
 
 
