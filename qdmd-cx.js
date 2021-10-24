@@ -96,9 +96,7 @@ async function jstoken() {
 			console.log(data);//打印出需要签到的物品详情--完全。
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
-			console.log(obj1[0].orderId);
-			console.log(obj1[1].orderId);
-			console.log(obj1[2].orderId);
+			console.log(obj1[cishu].orderId);
 			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
