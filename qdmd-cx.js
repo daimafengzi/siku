@@ -93,9 +93,8 @@ async function jstoken() {
 			data = JSON.parse(data);
 			//console.log(data);
 			var obj1 = eval(data);
-			var arr = obj1.split(" ");
-			for(var i=0;i<arr.length;i++){
-				console.log(obj1[arr].orderId);
+			for(var i=0;i<obj1.length;i++){
+				console.log(obj1[i].orderId);
 			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
