@@ -95,9 +95,13 @@ async function jstoken() {
 			console.log(data);//打印出需要签到的物品详情。
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
+				
+				if(obj1[cishu].combination=3){
 			console.log(obj1[cishu].orderId);
-			console.log(obj1[cishu].combination=3);
-			console.log(`\n`);
+			console.log(obj1[cishu].combination);
+			console.log(`\n`);	
+				}
+
 			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
@@ -129,6 +133,23 @@ function showMsg() {
   })
 }
 
+function taskUrl(functionId, body) {
+  return {
+    url: `${JD_API_HOST}api?appid=siteppM&functionId=${functionId}&forcebot=&t=${Date.now()}`,
+    body: `body=${encodeURIComponent(JSON.stringify(body))}`,
+    headers: {
+      "Host": "api.m.jd.com",
+      "Accept": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Origin": "https://msitepp-fm.jd.com",
+      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      "Referer": "https://msitepp-fm.jd.com/",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Cookie": cookie
+    }
+  }
+}
 
 
 function TotalBean() {
