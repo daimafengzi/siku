@@ -62,15 +62,8 @@ const JD_API_HOST = 'https://api.m.jd.com/';
   })
 
 async function price() {
-  let num = 0
-  do {
     await jstoken();
-    if ($.obj1) {
-      console.log('操蛋');
-    }
-    num++
-  } while (num < 3 && !$.obj1)
-  await showMsg()
+	await showMsg()
 }
 
 async function jstoken() {
