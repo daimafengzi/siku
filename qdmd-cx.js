@@ -62,7 +62,9 @@ const JD_API_HOST = 'https://api.m.jd.com/';
   })
 
 async function price() {
-    await jstoken();
+	for(var i=0;i<obj1.length;i++){
+				await jstoken();
+	}
 	await showMsg()
 }
 
@@ -93,9 +95,6 @@ async function jstoken() {
 			data = JSON.parse(data);
 			//console.log(data);
 			var obj1 = eval(data);
-			for(var i=0;i<obj1.length;i++){
-				console.log(obj1[i].orderId);
-			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
               return;
@@ -126,23 +125,46 @@ function showMsg() {
   })
 }
 
-function taskUrl(functionId, body) {
-  return {
-    url: `${JD_API_HOST}api?appid=siteppM&functionId=${functionId}&forcebot=&t=${Date.now()}`,
-    body: `body=${encodeURIComponent(JSON.stringify(body))}`,
-    headers: {
-      "Host": "api.m.jd.com",
-      "Accept": "application/json",
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Origin": "https://msitepp-fm.jd.com",
-      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-      "Referer": "https://msitepp-fm.jd.com/",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Cookie": cookie
-    }
-  }
-}
+function taskUrl() {
+	return new Promise(async resolve => {
+	const optionss = {
+		"url": `https://api.m.jd.com/`,
+		"headers": {
+		"Accept": "application/json,text/plain, */*",
+		"Content-Type": "application/x-www-form-urlencoded",
+		"Accept-Encoding": "gzip, deflate, br",
+		"Accept-Language": "zh-cn",
+		"Connection": "keep-alive",
+		"Cookie": cookie,
+		"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=3347d4988324d948d7e998cb7b7cdbbw&un_area=16_1362_44319_55501",
+		"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+		},
+		body: "functionId=signFreeSignIn&body=%7B%22linkId%22%3A%22PiuLvM8vamONsWzC0wqBGQ%22%2C%22orderId%22%3A"+[obj1[i].orderId]+"%7D&t=1634355472032&appid=activities_platform&client=H5&clientVersion=1.0.0"
+		}
+    $.post(), (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(JSON.stringify(err))
+          console.log(`${$.name} siteppM_appliedSuccAmount API请求失败，请检查网路重试`)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data)
+			console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
+            if(str.indexOf('"success":true') !=-1){
+				message += `京东账号  ${$.index}】${$.nickName || $.UserName}\n ${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：签到成功，请手动查看！`
+			}else{
+				message +=  `京东账号  ${$.index}】${$.nickName || $.UserName}\n${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}`
+			}
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data)
+      }
+    })
+	})//return new Promise(async resolve => {
+}//最后的大括号
 
 function TotalBean() {
   return new Promise(async resolve => {
