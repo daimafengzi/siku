@@ -99,7 +99,8 @@ async function jstoken() {
 			//测试获取未签到的数据
 			var qiandaozhuangtai=obj1[cishu].combination
 			if(qiandaozhuangtai=="3"){
-			console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
+			qiandaoID =[obj1[cishu].orderId];
+			console.log(qiandaoID);//打印出需要签到的物品ID。		
 			taskUrl();
 			}else{
 				if(qiandaozhuangtai=="2"){
