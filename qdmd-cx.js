@@ -12,6 +12,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 var obj1 = '';//定义签到物品数组
 let cishu= 0;//定义签到次数
+const qiandaoID="";//定义签到ID
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, allMessage = '';
 if ($.isNode()) {
@@ -64,7 +65,6 @@ const JD_API_HOST = 'https://api.m.jd.com/';
 
 async function price() {
 	await jstoken();
-	await taskUrl();
 	await showMsg();
 }
 
@@ -90,13 +90,30 @@ async function jstoken() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
+			//console.log(data);//打印出需要签到的物品详情--完全。
 			data = JSON.stringify(data.data.signFreeOrderInfoList);
-			//console.log(data);//打印出需要签到的物品详情。
 			data = JSON.parse(data);
-			console.log(data);//打印出需要签到的物品详情--完全。
+			//console.log(data);//打印出需要签到的物品详情。
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
-			console.log(obj1[cishu].orderId);
+			//console.log(obj1[cishu].combination);//打印对应ID是否需要签到。
+			//测试获取未签到的数据
+			var qiandaozhuangtai=obj1[cishu].combination
+			if(qiandaozhuangtai=="3"){
+			//console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
+			qiandaoID =[obj1[cishu].orderId]
+			await taskUrl();
+			}else{
+				if(qiandaozhuangtai=="2"){
+				console.log([obj1[cishu].productName]+"，今日已经签到过无需再次签到");
+				message += `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：今日已经签到过无需再次签到}`
+				}else{
+				console.log([obj1[cishu].productName]+"，新购买物品，今日无法签到");
+				message += `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：新购买物品，今日无法签到}`
+				}
+			}
+			//测试获取未签到的数据
+
 			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
@@ -142,7 +159,7 @@ function taskUrl() {
 		"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=3347d4988324d948d7e998cb7b7cdbbw&un_area=16_1362_44319_55501",
 		"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
 		},
-		body: "functionId=signFreeSignIn&body=%7B%22linkId%22%3A%22PiuLvM8vamONsWzC0wqBGQ%22%2C%22orderId%22%3A"+[obj1[i].orderId]+"%7D&t=1634355472032&appid=activities_platform&client=H5&clientVersion=1.0.0"
+		body: "functionId=signFreeSignIn&body=%7B%22linkId%22%3A%22PiuLvM8vamONsWzC0wqBGQ%22%2C%22orderId%22%3A"+qiandaoID+"%7D&t=1634355472032&appid=activities_platform&client=H5&clientVersion=1.0.0"
 		}
     $.post(optionss, (err, resp, data) => {
       try {
@@ -155,8 +172,6 @@ function taskUrl() {
 			console.log(`${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：${JSON.stringify(data)}\n`);
             if(str.indexOf('"success":true') !=-1){
 				message += `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n 结果：签到成功，请手动查看！`
-			}else{
-				message += `${obj1[i].productName}\n 需要签到总天数：${obj1[i].needSignDays}\n 已经签到天数：${obj1[i].hasSignDays}\n 签到返还金额：${obj1[i].freeAmount}\n  结果：${JSON.stringify(data.errMsg)}`
 			}
           }
         }
