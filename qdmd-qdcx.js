@@ -95,9 +95,9 @@ async function jstoken() {
 			console.log(data);//打印出需要签到的物品详情。
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
-			console.log(data.combination);
+			console.log(obj1[cishu].combination);
 			//测试获取未签到的数据
-			if(data.combination="2"){
+			if(obj1[cishu].combination="2"){
 			console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
 			}else{
 			console.log("签到过了还签到？");
