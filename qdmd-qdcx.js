@@ -89,13 +89,13 @@ async function jstoken() {
         } else {
           if (safeGet(data)) {
             data = JSON.parse(data);
-			console.log(data);//打印出需要签到的物品详情--完全。
+			//console.log(data);//打印出需要签到的物品详情--完全。
 			data = JSON.stringify(data.data.signFreeOrderInfoList);
 			data = JSON.parse(data);
-			console.log(data);//打印出需要签到的物品详情。
+			//console.log(data);//打印出需要签到的物品详情。
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
-				
+				console.log(cishu);
 				if(obj1[cishu].combination=3){
 			console.log(obj1[cishu].orderId);
 			console.log(obj1[cishu].combination);
