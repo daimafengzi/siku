@@ -1,12 +1,12 @@
 /*
-签到订单查询
+签到免单【提现】
 活动地址：https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=116.451748&lat=25.667077&sid=538d4cff455fbcd0a48217f9612cca1w&un_area=16_1362_1365_45002&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=Qqfriends&ad_od=share&utm_user=plusmember
 ================Loon==============
 [Script]
-cron "41 0,12,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=签到订单查询
+cron "41 0,12,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=签到免单【提现】
 
  */
-const $ = new Env('签到订单查询');
+const $ = new Env('签到免单【提现】');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -63,7 +63,7 @@ const JD_API_HOST = 'https://api.m.jd.com/';
   })
 
 async function price() {
-	await tixian();
+	await jstoken();
 	await showMsg();
 }
 
@@ -82,7 +82,7 @@ function taskUrl() {
 	console.log(qiandaoID);
 }
 
-await function tixian() {
+await function jstoken() {
 	return new Promise(async resolve => {
 	const optionss = {
 		"url": `https://api.m.jd.com/`,
