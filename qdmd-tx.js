@@ -80,7 +80,7 @@ async function jstoken() {
 				"Cookie": cookie,
 				"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=b230b002a2ffd3d11a01a6bb2a644f2w&un_area=16_1362_1365_45002",
 				"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
-			}
+			},
 			body: "functionId%3DsignFreePrize%26body%3D%7B%22linkId%22%3A%22PiuLvM8vamONsWzC0wqBGQ%22%2C%22orderId%22%3A225554293963%2C%22prizeType%22%3A2%7D%26t%3D1635504016067%26appid%3Dactivities_platform%26client%3DH5%26clientVersion%3D1.0.0"
 			}
 	$.post(options, (err, resp, data) => {
