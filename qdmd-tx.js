@@ -1,12 +1,12 @@
 /*
-签到免单【提现】
+签到订单查询
 活动地址：https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=116.451748&lat=25.667077&sid=538d4cff455fbcd0a48217f9612cca1w&un_area=16_1362_1365_45002&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=Qqfriends&ad_od=share&utm_user=plusmember
 ================Loon==============
 [Script]
-cron "41 0,12,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=签到免单【提现】
+cron "41 0,12,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=签到订单查询
 
  */
-const $ = new Env('签到免单【提现】');
+const $ = new Env('签到订单查询');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -67,6 +67,72 @@ async function price() {
 	await showMsg();
 }
 
+async function jstoken() {
+	return new Promise(async resolve => {
+		const options = {
+			"url": `https://api.m.jd.com/`,
+			"headers": {
+				"Accept": "application/json,text/plain, */*",
+				"Content-Type": "application/x-www-form-urlencoded",
+				"Accept-Encoding": "gzip, deflate, br",
+				"Accept-Language": "zh-cn",
+				"Connection": "keep-alive",
+				"Cookie": cookie,
+				"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=b230b002a2ffd3d11a01a6bb2a644f2w&un_area=16_1362_1365_45002",
+				"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+			}
+			body: "functionId%3DsignFreePrize%26body%3D%7B%22linkId%22%3A%22PiuLvM8vamONsWzC0wqBGQ%22%2C%22orderId%22%3A225554293963%2C%22prizeType%22%3A2%7D%26t%3D1635504016067%26appid%3Dactivities_platform%26client%3DH5%26clientVersion%3D1.0.0"
+			}
+	$.post(options, (err, resp, data) => {
+      try {
+        if (err) {
+          $.logErr(err)
+        } else {
+          if (safeGet(data)) {
+            data = JSON.parse(data);
+			console.log(data);//打印出需要签到的物品详情--完全。
+			data = JSON.stringify(data.data.signFreeOrderInfoList);
+			data = JSON.parse(data);
+			console.log(data);//打印出需要签到的物品详情。
+			var obj1 = eval(data);
+			for (cishu = 0; cishu < obj1.length; cishu++) {
+			console.log(obj1[cishu].combination);
+			//测试获取未签到的数据
+			var qiandaozhuangtai=obj1[cishu].combination
+			if(qiandaozhuangtai=="3"){
+			qiandaoID =[obj1[cishu].orderId];
+			console.log(qiandaoID);//打印出需要签到的物品ID。		
+			taskUrl();
+			}else{
+				if(qiandaozhuangtai=="2"){
+				console.log([obj1[cishu].productName]+"，今日已经签到过无需再次签到");
+				}else{
+				console.log([obj1[cishu].productName]+"，新购买物品，今日无法签到");
+				}
+			}
+			//测试获取未签到的数据
+
+			}
+            if (data['retcode'] === 1001) {
+              $.isLogin = false; //cookie过期
+              return;
+            }
+            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
+              $.nickName = data.data.userInfo.baseInfo.nickname;
+            }
+          } else {
+            console.log('京东服务器返回空数据');
+          }
+        }
+      } catch (e) {
+        $.logErr(e)
+      } finally {
+        resolve();
+      }
+    })//$.get(options, (err, resp, data) => {
+	})//return new Promise(async resolve => {
+}//最后的大括号
+
 function showMsg() {
   return new Promise(resolve => {
     if (message) {
@@ -81,45 +147,6 @@ function taskUrl() {
 	console.log('您好， 到我说话了！');
 	console.log(qiandaoID);
 }
-
-await function jstoken() {
-	return new Promise(async resolve => {
-	const optionss = {
-		"url": `https://api.m.jd.com/`,
-		"headers": {
-		"Accept": "application/json,text/plain, */*",
-		"Content-Type": "application/x-www-form-urlencoded",
-		"Accept-Encoding": "gzip, deflate, br",
-		"Accept-Language": "zh-cn",
-		"Connection": "keep-alive",
-		"Cookie": cookie,
-		"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=b230b002a2ffd3d11a01a6bb2a644f2w&un_area=16_1362_1365_45002",
-		"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
-		},
-		body: "functionId%3DsignFreePrize%26body%3D%7B%22linkId%22%3A%22PiuLvM8vamONsWzC0wqBGQ%22%2C%22orderId%22%3A225554293963%2C%22prizeType%22%3A2%7D%26t%3D1635504016067%26appid%3Dactivities_platform%26client%3DH5%26clientVersion%3D1.0.0"
-		}
-    $.post(optionss, (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} siteppM_appliedSuccAmount API请求失败，请检查网路重试`)
-        } else {
-          if (safeGet(data)) {
-            data = JSON.parse(data)
-			console.log(data)
-			//console.log(`${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：${JSON.stringify(data)}\n\n`);
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data)
-      }
-    })//$.post(), (err, resp, data)
-	})//return new Promise(async resolve => {
-}
-
-
 
 
 function TotalBean() {
