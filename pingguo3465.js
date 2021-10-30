@@ -6,7 +6,7 @@
 
 ================Loon==============
 [Script]
-cron "54 59 7 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=极速版【苹果XR减3465】优惠券
+cron "50 59 19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=极速版【苹果XR减3465】优惠券
 
  */
 const $ = new Env('极速版【苹果XR减3465】优惠券');
@@ -14,7 +14,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
-const randomCount = $.isNode() ? 1 : 1;//运行1次。相隔1秒一次
+const randomCount = $.isNode() ? 50 : 1;//运行1次。相隔1秒一次
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 if ($.isNode()) {
