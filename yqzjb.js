@@ -92,7 +92,7 @@ async function jstoken() {
           if (safeGet(data)) {
 			//console.log(options);
             data = JSON.parse(data);
-			console.log(data);
+			//console.log(data);
 			var str="{"+data+"}";
             if(str.indexOf("message: 'success'") !=-1){
 				console.log("邀请成功！！");
