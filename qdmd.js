@@ -14,6 +14,10 @@ var obj1 = {};//定义签到物品数组
 let cishu= 0;//定义签到次数
 let qiandaoID="";//定义签到ID
 let shijian=Date.now();//定义时间
+let productName="";//定义商品名称
+let needSignDays="";//定义需要签到总天数
+let hasSignDays="";//定义已经签到天数
+let freeAmount="";//定义签到返还金额
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, allMessage = '';
 if ($.isNode()) {
@@ -103,7 +107,13 @@ async function jstoken() {
 			if(qiandaozhuangtai=="3"){
 			//console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
 			qiandaoID =[obj1[cishu].orderId];
-			//console.log(qiandaoID);//打印出需要签到的物品ID。	
+			//console.log(qiandaoID);//打印出需要签到的物品ID。
+			//定义消息内容函数开始
+			productName=[obj1[cishu].productName];
+			needSignDays=[obj1[cishu].needSignDays];
+			hasSignDays=[obj1[cishu].hasSignDays];
+			freeAmount=[obj1[cishu].freeAmount];
+			//定义消息内容函数结束
 			taskUrl();
 			}else if(qiandaozhuangtai=="2"){
 				//console.log([obj1[cishu].productName]+"，今日已经签到过无需再次签到");
@@ -172,10 +182,15 @@ function taskUrl() {
           if (safeGet(data)) {
             data = JSON.parse(data)
 			//console.log(optionss)
-			console.log(`需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：${JSON.stringify(data)}\n\n`);
+			var jieguo=JSON.stringify(data);
+			//console.log(productName);
+			//console.log(needSignDays);
+			//console.log(hasSignDays);
+			//console.log(freeAmount);
+			//console.log(productName+"需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果："+jieguo+"\n\n");
 			var str="{"+data+"}";
             if(str.indexOf('"success":true') !=-1){
-				message += `需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n 结果：签到成功，请手动查看！\n\n`
+				message += productName+"需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果：签到成功，请手动查看！\n\n"
 			}
           }
         }
