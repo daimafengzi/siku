@@ -10,8 +10,7 @@ const $ = new Env('极速版邀请赚金币');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-var obj1 = '';//定义签到物品数组
-let cishu= 0;//定义签到次数
+let shijian=Date.now();//定义时间
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, allMessage = '';
 if ($.isNode()) {
@@ -69,8 +68,9 @@ async function price() {
 
 async function jstoken() {
 	return new Promise(async resolve => {
+		UUID = getUUID('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
 		const options = {
-			"url": `https://gray.jd.com/invitee/?inviterId=PkvqAfMTF/M6nsvHTxm7iCp4BuRo4J0svFR+Bcs/yCs=&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=Qqfriends&ad_od=share`,
+			"url": `https://api.m.jd.com/`,
 			"headers": {
 				"Accept": "application/json,text/plain, */*",
 				"Content-Type": "application/x-www-form-urlencoded",
@@ -78,17 +78,19 @@ async function jstoken() {
 				"Accept-Language": "zh-cn",
 				"Connection": "keep-alive",
 				"Cookie": cookie,
-				"Referer": "https://gray.jd.com/invitee/?inviterId=PkvqAfMTF/M6nsvHTxm7iCp4BuRo4J0svFR+Bcs/yCs=&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=Qqfriends&ad_od=share",
+				"Origin": "https://gray.jd.com",
+				"Referer": "https://gray.jd.com/?inviterId=PkvqAfMTF/M6nsvHTxm7iCp4BuRo4J0svFR+Bcs/yCs=&sid=31719ec0f642fea70f6859035de038cw&un_area=16_1362_1365_45002",
 				"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
-			}
+			},
+		body: "functionId=TaskInviteService&body=%7B%22method%22%3A%22participateInviteTask%22%2C%22data%22%3A%7B%22channel%22%3A%221%22%2C%22encryptionInviterPin%22%3A%22PkvqAfMTF%2FM6nsvHTxm7iCp4BuRo4J0svFR%2BBcs%2FyCs%3D%22%2C%22type%22%3A1%7D%7D&appid=market-task-h5&uuid="+UUID+"&eu=8363535333432343933383131383&fv=93D2136383268363365683361643&_t="+shijian
 		}
-	$.get(options, (err, resp, data) => {
+	$.post(options, (err, resp, data) => {
       try {
         if (err) {
           $.logErr(err)
         } else {
           if (safeGet(data)) {
-			console.log(data);
+			console.log(options);
             data = JSON.parse(data);
 			console.log(data);
             if (data['retcode'] === 1001) {
@@ -119,6 +121,18 @@ function showMsg() {
     $.msg($.name, '', `【京东账号${$.index}】${$.nickName}\n${message}`);
     resolve()
   })
+}
+
+function getUUID(format = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', UpperCase = 0) {
+    return format.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        if (UpperCase) {
+            uuid = v.toString(36).toUpperCase();
+        } else {
+            uuid = v.toString(36)
+        }
+        return uuid;
+    });
 }
 
 function TotalBean() {
