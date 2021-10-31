@@ -90,9 +90,15 @@ async function jstoken() {
           $.logErr(err)
         } else {
           if (safeGet(data)) {
-			console.log(options);
+			//console.log(options);
             data = JSON.parse(data);
 			console.log(data);
+			var str="{"+data+"}";
+            if(str.indexOf("message: 'success'") !=-1){
+				console.log("邀请成功！！");
+			}else{
+				console.log(data.message);
+			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
               return;
