@@ -5,7 +5,7 @@
 export tytpacketId=""
  [task_local]
 #柠檬推一推
-0 0 * * * http://nm66.top/jd_tyt.js, tag=柠檬推一推, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+23 1,11 * * * http://nm66.top/jd_tyt.js, tag=柠檬推一推, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 */
 const $ = new Env('柠檬推一推');
 const notify = $.isNode() ? require('./sendNotify') : '';
