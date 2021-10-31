@@ -91,7 +91,6 @@ async function jstoken() {
 			console.log(data);
             data = JSON.parse(data);
 			console.log(data);
-			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
               return;
@@ -99,6 +98,8 @@ async function jstoken() {
             if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
               $.nickName = data.data.userInfo.baseInfo.nickname;
             }
+          } else {
+            console.log('京东服务器返回空数据');
           }
         }
       } catch (e) {
