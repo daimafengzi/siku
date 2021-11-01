@@ -1,22 +1,23 @@
 /*
-极速版【苹果XR减3465】优惠券
+京东健康9.9减9优惠券
 短期活动
 
-活动网页地址：https://3.cn/1kK-E5N1?_ts=1633804223817&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=CopyURL&ad_od=share&utm_user=plusmember
+活动入口：京东APP首页-京东汽车-屏幕右中部，车主福利
+活动网页地址：https://u.jd.com/aK2gU7C
 
 ================Loon==============
 [Script]
-cron "50 59 9,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=极速版【苹果XR减3465】优惠券
+cron "55 59 12 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=京东健康9.9减9优惠券
 
  */
-const $ = new Env('极速版【苹果XR减3465】优惠券');
+const $ = new Env('京东健康9.9减9优惠券');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let jdNotify = false;//是否关闭通知，false打开通知推送，true关闭通知推送
-const randomCount = $.isNode() ? 50 : 1;//运行1次。相隔1秒一次
+const randomCount = $.isNode() ? 5 : 1;//运行2次。相隔1秒一次
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
+let shijian=Date.now();//定义时间
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -26,7 +27,7 @@ if ($.isNode()) {
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
-const JD_API_HOST = 'https://api.m.jd.com/client.action?';
+let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
@@ -75,11 +76,11 @@ function exchange() {
           console.log(data);
           if (safeGet(data)) {
             data = JSON.parse(data);
-            console.log(`【极速版【苹果XR减3465】优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}\n`);
+            console.log(`【京东健康9.9减9优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}\n`);
 			//自行添加通知项目开始
 			var str="{"+data.subCodeMsg+"}";
 			if(str.indexOf('领取成功') !=-1){
-				notify.sendNotify($.name, `京东账号  ${$.nickName || $.UserName}\n【极速版【苹果XR减3465】优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}`);
+				notify.sendNotify($.name, `京东账号  ${$.nickName || $.UserName}\n【京东健康9.9减9优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}`);
 				}
 			//自行添加通知项目结束
           }
@@ -95,20 +96,19 @@ function exchange() {
 
 function taskUrl(function_id, body = {}) {
   return {
-    // url: `${JD_API_HOST}${function_id}?timestamp=${new Date().getTime() + new Date().getTimezoneOffset() * 60 * 1000 + 8 * 60 * 60 * 1000}`,
-    url: `https://api.m.jd.com/client.action?functionId=lite_newBabelAwardCollection`,
+    url: `https://api.m.jd.com/client.action?functionId=newBabelAwardCollection`,
     headers: {
       "Accept": "*/*",
       "Accept-Encoding": "gzip, deflate, br",
       "Accept-Language": "zh-cn",
       "Connection": "keep-alive",
       "Content-Type": "application/x-www-form-urlencoded",
-      'origin': 'https://prodev.m.jd.com',
-      "Referer": "https://pro.m.jd.com/",
+      'origin': 'https://pro.m.jd.com',
+      "Referer": 'https://pro.m.jd.com/mall/active/FtmXeqtCX3QMbM1jJXy89CHzfC8/index.html?utm_campaign=t_1000894247_&utm_term=87981b7c1fa44a0ba8584e80a4dcbe49&utm_medium=tuiguang&tttparams=Ti2jzeyJncHNfYXJlYSI6IjE2XzEzNjJfMTM2NV80NTAwMiIsInByc3RhdGUiOiIwIiwidW5fYXJlYSI6IjE2XzEzNjJfMTM2NV80NTAwMiIsIm1vZGVsIjoiaVBob25lMTAsMyIsImdMYXQiOiIyNS42NjU0MjEiLCJnTG5nIjoiMTE2LjQxODY0IiwibG5nIjoiMTE2LjQ1MTg3MSIsImxhdCI6IjI1LjY2Njk2NS5J9&utm_source=kong&cu=true&un_area=16_1362_1365_45002&lng=116.4518713584913&lat=25.66696509631094',
       "Cookie": cookie,
       "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
     },
-    body: "body=%7B%22activityId%22%3A%223H885vA4sQj6ctYzzPVix4iiYN2P%22%2C%22scene%22%3A%221%22%2C%22args%22%3A%22key%3DB80083A2B0174FAD947BF8824FF4EF969669BC5129712A8EA9CADC0C09DD6D07601939141F18C2DAFBD37A9865BFDC69_babel%2CroleId%3D7A075BC1F8D893000249F94956E57CAD_babel%2CstrengthenKey%3D281033DADF9F63C5ED2419FA001BEB0EFA083B6E82C395456F9A70404998DD097FC96BE0CA4CC3F134A3A21BC1E84856_babel%22%2C%22platform%22%3A%221%22%2C%22orgType%22%3A%222%22%2C%22openId%22%3A%22-1%22%2C%22pageClickKey%22%3A%22-1%22%2C%22eid%22%3A%222K2R5LUAOZLJEGUOKOLKJESKGW3PNC4WENTZX5J3AD5DGPJ43PVTJAKCCDGRSW4T4L3TEYIMPXYCCZLESFIBSEINQU%22%2C%22fp%22%3A%229d31c4680bab5973436036cd2c8dcdd7%22%2C%22shshshfp%22%3A%22cb3e064002f321e570fbb3780e0e65f5%22%2C%22shshshfpa%22%3A%2251ffb3d7-f639-517a-db55-de017de82f24-1593939396%22%2C%22shshshfpb%22%3A%22pXq9bWYgnr90io6zFeE2x5g%3D%3D%22%2C%22childActivityUrl%22%3A%22https%253A%252F%252Fpro.m.jd.com%252Fjdlite%252Factive%252F3H885vA4sQj6ctYzzPVix4iiYN2P%252Findex.html%253F__in_task_view__%253DjdLiteiOS%2526lng%253D116.451831%2526lat%253D25.666916%2526sid%253D2840c83277bfad804396524b8a77604w%2526un_area%253D16_1362_1365_45002%22%2C%22userArea%22%3A%22-1%22%2C%22client%22%3A%22-1%22%2C%22clientVersion%22%3A%22-1%22%2C%22uuid%22%3A%22-1%22%2C%22osVersion%22%3A%22-1%22%2C%22brand%22%3A%22-1%22%2C%22model%22%3A%22-1%22%2C%22networkType%22%3A%22-1%22%2C%22jda%22%3A%2271854095.15939393960041822512964.1593939396.1635596488.1635609446.580%22%2C%22sdkToken%22%3A%22%22%2C%22token%22%3A%22XE5SN54LJK4SIXIPL7XURBLS6EK2URWIOZ23CNE3TJXHXCV7GKYHJPXPBW6HLM77EOXWBQYHK5M5W%22%2C%22jstub%22%3A%223Y462HJHKOUTIA5EKH2GD2P3MV5NQ37SW3732SO2KTEUETHVGUAMDNZS434N5FKDCJW6IMQATVDIGA4TIXZGPGR3DXKCHP3XNQ3XB6A%22%2C%22pageClick%22%3A%22Babel_Coupon%22%2C%22couponSource%22%3A%22manual%22%2C%22couponSourceDetail%22%3A%22-100%22%2C%22channel%22%3A%22%E9%80%9A%E5%A4%A9%E5%A1%94%E4%BC%9A%E5%9C%BA%22%2C%22headArea%22%3A%22605715ec560d6508f7403b91b677d79c%22%2C%22mitemAddrId%22%3A%22%22%2C%22geo%22%3A%7B%22lng%22%3A%22116.451831%22%2C%22lat%22%3A%2225.666916%22%7D%2C%22addressId%22%3A%22%22%2C%22posLng%22%3A%22%22%2C%22posLat%22%3A%22%22%2C%22focus%22%3A%22%22%2C%22innerAnchor%22%3A%22%22%2C%22cv%22%3A%222.0%22%7D&screen=750*1334&client=wh5&clientVersion=1.0.0&sid=2840c83277bfad804396524b8a77604w&uuid=15939393960041822512964.819.1635610260288&area=16_1362_1365_45002"
+    body: "body=%7B%22activityId%22%3A%22FtmXeqtCX3QMbM1jJXy89CHzfC8%22%2C%22scene%22%3A%221%22%2C%22args%22%3A%22key%3DFFC45B30917FDE3DE7FE7A89F410368DCE5B62A4587C272B77C1DD056F76D5688E935C4937B4BFC33A86829A1E461738_babel%2CroleId%3D659E4D1FE7AA35E71B056A56CCE2196F_babel%2CstrengthenKey%3D8A6D6CEC2F291967E434E4CC69163165D22CB7D37024C33BB3659DC1C40D29F6285A6890546D5F57529E216A872533BA_babel%22%2C%22platform%22%3A%221%22%2C%22orgType%22%3A%222%22%2C%22openId%22%3A%22-1%22%2C%22pageClickKey%22%3A%22-1%22%2C%22eid%22%3A%22eidI632d812034s8hHh7MD%2B4QBKKlaPreRmBRIR4fJ9eZ5%2FKW2JNf%2FAZU02%2Fy6Q6AzlianY3ISMPQb2oMnaEStp%2B%2F4bevHLvCKoI4g44JdayfJDtyH43%22%2C%22fp%22%3A%22-1%22%2C%22shshshfp%22%3A%227b5de775a80ee20ff7a1e51d84058aaf%22%2C%22shshshfpa%22%3A%227acba88c-c253-02d7-7c9c-2c07d351902e-1625825572%22%2C%22shshshfpb%22%3A%22sMdaZiFghcILYBa62cCv%20cQ%3D%3D%22%2C%22childActivityUrl%22%3A%22https%253A%252F%252Fpro.m.jd.com%252Fmall%252Factive%252FFtmXeqtCX3QMbM1jJXy89CHzfC8%252Findex.html%253Futm_campaign%253Dt_1000894247_%2526utm_term%253D87981b7c1fa44a0ba8584e80a4dcbe49%2526utm_medium%253Dtuiguang%2526tttparams%253DTi2jzeyJncHNfYXJlYSI6IjE2XzEzNjJfMTM2NV80NTAwMiIsInByc3RhdGUiOiIwIiwidW5fYXJlYSI6IjE2XzEzNjJfMTM2NV80NTAwMiIsIm1vZGVsIjoiaVBob25lMTAsMyIsImdMYXQiOiIyNS42NjU0MjEiLCJnTG5nIjoiMTE2LjQxODY0IiwibG5nIjoiMTE2LjQ1MTg3MSIsImxhdCI6IjI1LjY2Njk2NS5J9%2526utm_source%253Dkong%2526cu%253Dtrue%2526un_area%253D16_1362_1365_45002%2526lng%253D116.4518713584913%2526lat%253D25.66696509631094%22%2C%22userArea%22%3A%22-1%22%2C%22client%22%3A%22%22%2C%22clientVersion%22%3A%22%22%2C%22uuid%22%3A%22%22%2C%22osVersion%22%3A%22%22%2C%22brand%22%3A%22%22%2C%22model%22%3A%22%22%2C%22networkType%22%3A%22%22%2C%22jda%22%3A%22-1%22%2C%22pageClick%22%3A%22Babel_Coupon%22%2C%22couponSource%22%3A%22manual%22%2C%22couponSourceDetail%22%3A%22-100%22%2C%22channel%22%3A%22%E9%80%9A%E5%A4%A9%E5%A1%94%E4%BC%9A%E5%9C%BA%22%2C%22headArea%22%3A%22af5eee1bfefb75f18157cbefd67a9f770d6f6c6a9e97d67b35185bb9b2234235%22%2C%22siteClient%22%3A%22apple%22%2C%22mitemAddrId%22%3A%22%22%2C%22geo%22%3A%7B%22lng%22%3A%22116.451871%22%2C%22lat%22%3A%2225.666965%22%7D%2C%22addressId%22%3A%223306524129%22%2C%22posLng%22%3A%22116.41864%22%2C%22posLat%22%3A%2225.665421%22%2C%22un_area%22%3A%2216_1362_1365_45002%22%2C%22gps_area%22%3A%2216_1362_1365_45002%22%2C%22homeLng%22%3A%22116.41864%22%2C%22homeLat%22%3A%2225.665421%22%2C%22focus%22%3A%22%22%2C%22innerAnchor%22%3A%22%22%2C%22cv%22%3A%222.0%22%2C%22_mkjdcn%22%3A%22%22%7D&screen=750*1334&client=wh5&clientVersion=1.0.0&sid=d86376ad702f263f2834b9854e49099w&uuid=e88fa069294a38bb58db216d3fd38c3a8d916c50&area=16_1362_1365_45002&ext=%7B%22prstate%22%3A%220%22%7D"
   }
 }
 
