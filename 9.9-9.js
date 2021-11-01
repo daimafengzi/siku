@@ -14,7 +14,7 @@ const $ = new Env('京东健康9.9减9优惠券');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-const randomCount = $.isNode() ? 5 : 1;//运行2次。相隔1秒一次
+const randomCount = $.isNode() ? 1 : 1;//运行2次。相隔1秒一次
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 let shijian=Date.now();//定义时间
