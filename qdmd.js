@@ -187,12 +187,8 @@ function taskUrl() {
 			//console.log(needSignDays);
 			//console.log(hasSignDays);
 			//console.log(freeAmount);
-			console.log(productName+"需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果："+jieguo+"\n\n");
-			var str="{"+data+"}";
-            if(str.indexOf("true") !=-1){
-				//message += productName+"需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果：签到成功，请手动查看！\n\n";
-				message += productName + `\n 需要签到总天数`+needSignDays+`\n 已经签到天数：`+hasSignDays+`\n 签到返还金额`+freeAmount+`\n 结果：签到成功，请手动查看！\n\n`
-			}
+			console.log(productName+"\n需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果："+jieguo+"\n\n");
+			message += productName + `\n 需要签到总天数`+needSignDays+`\n 已经签到天数：`+hasSignDays+`\n 签到返还金额`+freeAmount+`\n 结果：签到成功，请手动查看！\n\n`
           }
         }
       } catch (e) {
