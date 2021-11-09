@@ -119,7 +119,7 @@ async function jstoken() {
 				//console.log([obj1[cishu].productName]+"，今日已经签到过无需再次签到");
 				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n  结果：今日已经签到过无需再次签到\n\n`
 			}else if(qiandaozhuangtai=="6"){
-				tixian();
+				//tixian();//因为有其他账号不能提现所以暂停自动提现
 				//console.log([obj1[cishu].productName]+"，新购买物品，今日无法签到");
 			}else{
 				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n  结果：新购买物品，今日无法签到\n\n`
@@ -190,7 +190,8 @@ function taskUrl() {
 			console.log(productName+"需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果："+jieguo+"\n\n");
 			var str="{"+data+"}";
             if(str.indexOf("true") !=-1){
-				message += productName+"需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果：签到成功，请手动查看！\n\n"
+				//message += productName+"需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果：签到成功，请手动查看！\n\n";
+				message += productName + `\n 需要签到总天数`+needSignDays+`\n 已经签到天数：`+hasSignDays+`\n 签到返还金额`+freeAmount+`\n 结果：签到成功，请手动查看！\n\n`
 			}
           }
         }
