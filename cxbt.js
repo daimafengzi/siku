@@ -3,7 +3,7 @@
 活动地址：https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=116.451748&lat=25.667077&sid=538d4cff455fbcd0a48217f9612cca1w&un_area=16_1362_1365_45002&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=Qqfriends&ad_od=share&utm_user=plusmember
 ================Loon==============
 [Script]
-cron "41 0,12,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=查询白条信息
+cron "3 0 8 1 * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=查询白条信息
 
  */
 const $ = new Env('查询白条信息');
@@ -90,11 +90,16 @@ async function jstoken() {
           $.logErr(err)
         } else {
           if (safeGet(data)) {
-            //data = JSON.parse(data);
-			console.log(data);//打印出需要签到的物品详情--完全。
-			data = JSON.stringify(data);
-			console.log(data);//打印出需要签到的物品详情。
-
+			data = JSON.parse(data)
+			data = data.resultData;
+			//console.log(data);//打印出需要签到的物品详情。
+			console.log(`入账金额：${JSON.stringify(data.billAmount)}\n`);//打印入账金额
+			console.log(`已还款：${JSON.stringify(data.payedAmt)}\n`);//打印已还款
+			console.log(`已退款：${JSON.stringify(data.refundSdpAmt)}\n`);//打印已退款
+			console.log(`出账日：${JSON.stringify(data.curBillDate)}\n`);//打印出账日
+			console.log(`待还款：${JSON.stringify(data.sdpAmt)}\n`);//打印待还款
+			console.log(`最后还款日：${JSON.stringify(data.curBillLimitDate)}\n`);//打印最后还款日
+			message += `白条出账日：${JSON.stringify(data.curBillDate)}\n 入账金额：${JSON.stringify(data.billAmount)} 元\n 已经还款：${JSON.stringify(data.payedAmt)} 元\n 已经退款：${JSON.stringify(data.refundSdpAmt)} 元\n 待还款：${JSON.stringify(data.sdpAmt)} 元\n 最后还款日：${JSON.stringify(data.curBillLimitDate)}\n\n`
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
               return;

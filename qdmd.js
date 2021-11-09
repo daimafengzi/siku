@@ -103,17 +103,17 @@ async function jstoken() {
 			for (cishu = 0; cishu < obj1.length; cishu++) {
 			//console.log(obj1[cishu].combination);//打印对应ID是否需要签到。
 			//测试获取未签到的数据
-			var qiandaozhuangtai=obj1[cishu].combination
-			if(qiandaozhuangtai=="3"){
-			//console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
-			qiandaoID =[obj1[cishu].orderId];
-			//console.log(qiandaoID);//打印出需要签到的物品ID。
 			//定义消息内容函数开始
 			productName=[obj1[cishu].productName];
 			needSignDays=[obj1[cishu].needSignDays];
 			hasSignDays=[obj1[cishu].hasSignDays];
 			freeAmount=[obj1[cishu].freeAmount];
 			//定义消息内容函数结束
+			var qiandaozhuangtai=obj1[cishu].combination
+			if(qiandaozhuangtai=="3"){
+			//console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
+			qiandaoID =[obj1[cishu].orderId];
+			//console.log(qiandaoID);//打印出需要签到的物品ID。
 			taskUrl();
 			}else if(qiandaozhuangtai=="2"){
 				//console.log([obj1[cishu].productName]+"，今日已经签到过无需再次签到");
