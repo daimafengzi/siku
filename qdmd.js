@@ -118,7 +118,60 @@ async function jstoken() {
 			//console.log([obj1[cishu].orderId]);//打印出需要签到的物品ID。	
 			qiandaoID =[obj1[cishu].orderId];
 			//console.log(qiandaoID);//打印出需要签到的物品ID。
-			taskUrl();
+			//执行签到开始
+					return new Promise(async resolve => {
+					const options = {
+						"url": `https://api.m.jd.com/`,
+						"headers": {
+							"Accept": "application/json,text/plain, */*",
+							"Content-Type": "application/x-www-form-urlencoded",
+							"Accept-Encoding": "gzip, deflate, br",
+							"Accept-Language": "zh-cn",
+							"Connection": "keep-alive",
+							"Cookie": cookie,
+							"Referer": "https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=117.020205&lat=25.074926&sid=b230b002a2ffd3d11a01a6bb2a644f2w&un_area=16_1362_1365_45002",
+							"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+						},
+						body: "functionId=signFreePrize&body=%7B%22linkId%22%3A%22PiuLvM8vamONsWzC0wqBGQ%22%2C%22orderId%22%3A"+qiandaoID+"%2C%22prizeType%22%3A2%7D&t="+shijian+"&appid=activities_platform&client=H5&clientVersion=1.0.0"
+						}
+					$.post(options, (err, resp, data) => {
+					try {
+					if (err) {
+					  $.logErr(err)
+					} else {
+					  if (safeGet(data)) {
+						data = JSON.parse(data);
+						console.log(data);//打印出需要提现详情--完全。
+						data = JSON.stringify(data.cashWithDrawMessage);
+						data = JSON.parse(data);
+						console.log(data);//打印出需要提现详情。
+						//message += `${data.cashWithDrawMessage}！\n\n`
+						var str="{"+data+"}";
+							if(str.indexOf('"success":true') !=-1){
+								message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n  结果：今日已经签到过无需再次签到\n\n`
+								}else{
+								message += `${data.cashWithDrawMessage}！\n\n`
+								}
+						if (data['retcode'] === 1001) {
+						  $.isLogin = false; //cookie过期
+						  return;
+						}
+						if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
+						  $.nickName = data.data.userInfo.baseInfo.nickname;
+						}
+					  } else {
+						console.log('京东服务器返回空数据');
+					  }
+					}
+				  } catch (e) {
+					$.logErr(e)
+				  } finally {
+					resolve();
+				  }
+				})
+				})
+			//执行签到结束
+			//taskUrl();
 			}else if(qiandaozhuangtai=="2"){
 				//console.log([obj1[cishu].productName]+"，今日已经签到过无需再次签到");
 				message += `${obj1[cishu].productName}\n 需要签到总天数：${obj1[cishu].needSignDays}\n 已经签到天数：${obj1[cishu].hasSignDays}\n 签到返还金额：${obj1[cishu].freeAmount}\n  结果：今日已经签到过无需再次签到\n\n`
