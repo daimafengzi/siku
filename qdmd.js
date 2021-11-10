@@ -108,6 +108,10 @@ async function jstoken() {
 			needSignDays=[obj1[cishu].needSignDays];
 			hasSignDays=[obj1[cishu].hasSignDays];
 			freeAmount=[obj1[cishu].freeAmount];
+			console.log(productName);
+			console.log(needSignDays);
+			console.log(hasSignDays);
+			console.log(freeAmount);
 			//定义消息内容函数结束
 			var qiandaozhuangtai=obj1[cishu].combination
 			if(qiandaozhuangtai=="3"){
