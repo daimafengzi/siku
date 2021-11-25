@@ -1,5 +1,5 @@
 /*
-京东健康9.9减9优惠券
+京东健康9.9减9.89优惠券
 短期活动
 
 活动入口：京东APP首页-京东汽车-屏幕右中部，车主福利
@@ -7,10 +7,10 @@
 
 ================Loon==============
 [Script]
-cron "55 59 12 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=京东健康9.9减9优惠券
+cron "55 59 12 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=京东健康9.9减9.89优惠券
 
  */
-const $ = new Env('京东健康9.9减9优惠券');
+const $ = new Env('京东健康9.9减9.89优惠券');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
