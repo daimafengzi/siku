@@ -107,9 +107,6 @@ function exchange() {
     })//$.get(options, (err, resp, data) => {
 	})//return new Promise(async resolve => {
 }//最后的大括号
-}
-
-
 
 function TotalBean() {
   return new Promise(async resolve => {
