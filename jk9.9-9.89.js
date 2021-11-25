@@ -86,7 +86,7 @@ function exchange() {
           $.logErr(err)
         } else {
           if (safeGet(data)) {
-            data = JSON.parse(data);
+            data = JSON.stringify(data);
 			console.log(data);//打印出需要签到的物品详情。
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
