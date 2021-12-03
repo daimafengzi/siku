@@ -1,16 +1,15 @@
 /*
-京东极速版抢券25减8优惠券
+京东极速版15减5优惠券
 短期活动
 
-活动入口：京东APP首页-京东汽车-屏幕右中部，车主福利
-活动网页地址：https://u.jd.com/aK2gU7C
+活动网页地址：https://3.cn/1kK-E5N1?_ts=1633804223817&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=CopyURL&ad_od=share&utm_user=plusmember
 
 ================Loon==============
 [Script]
-cron "55 59 6,9,14,17,20 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=京东极速版抢券25减8优惠券
+cron "55 59 6,9,14,17,20 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=京东极速版15减5优惠券
 
  */
-const $ = new Env('京东极速版抢券25减8优惠券');
+const $ = new Env('京东极速版15减5优惠券');
 const moment = require('moment');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -29,13 +28,11 @@ if ($.isNode()) {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
 const JD_API_HOST = 'https://api.m.jd.com/client.action?';
-let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 !(async () => {
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
     return;
   }
-  //await wait(50000)延时50000毫秒
   for (let j = 0; j < randomCount; ++j)
     for (let i = 0; i < cookiesArr.length; i++) {
       if (cookiesArr[i]) {
@@ -80,11 +77,11 @@ function exchange() {
           console.log(data);
           if (safeGet(data)) {
             data = JSON.parse(data);
-            console.log(`【9.9特卖9减5优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}\n`);
+            console.log(`【京东极速版15减5优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}\n`);
 			//自行添加通知项目开始
 			var str="{"+data.subCodeMsg+"}";
 			if(str.indexOf('领取成功') !=-1){
-				notify.sendNotify($.name, `京东账号  ${$.nickName || $.UserName}\n【京东极速版抢券25减8优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}`);
+				notify.sendNotify($.name, `京东账号  ${$.nickName || $.UserName}\n【京东极速版15减5优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}`);
 				}
 			//自行添加通知项目结束
           }
@@ -113,7 +110,7 @@ function taskUrl(function_id, body = {}) {
       "Cookie": cookie,
       "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
     },
-    body: "body=%7B%22activityId%22%3A%223H885vA4sQj6ctYzzPVix4iiYN2P%22%2C%22scene%22%3A%221%22%2C%22args%22%3A%22key%3DDE5194A32B782D02574313A2C61567D1B4397C0E4F3F80D985F0FBE64F3408CAC89B757F8BFE84F96BC296F6C1DECAB2_babel%2CroleId%3D57929D344021B7CD0532EEFB52032F0D_babel%2CstrengthenKey%3D281033DADF9F63C5ED2419FA001BEB0EFA083B6E82C395456F9A70404998DD097B31370D288576EB8E6A23D01CF85285_babel%22%2C%22platform%22%3A%221%22%2C%22orgType%22%3A%222%22%2C%22openId%22%3A%22-1%22%2C%22pageClickKey%22%3A%22-1%22%2C%22eid%22%3A%222K2R5LUAOZLJEGUOKOLKJESKGW3PNC4WENTZX5J3AD5DGPJ43PVTJAKCCDGRSW4T4L3TEYIMPXYCCZLESFIBSEINQU%22%2C%22fp%22%3A%22f24635f5049ae8562155b52ab3c7b3ba%22%2C%22shshshfp%22%3A%22cc32e89d7d8cd1f47dec996d097bd5c1%22%2C%22shshshfpa%22%3A%2251ffb3d7-f639-517a-db55-de017de82f24-1593939396%22%2C%22shshshfpb%22%3A%22pXq9bWYgnr90io6zFeE2x5g%3D%3D%22%2C%22childActivityUrl%22%3A%22https%253A%252F%252Fpro.m.jd.com%252Fjdlite%252Factive%252F3H885vA4sQj6ctYzzPVix4iiYN2P%252Findex.html%253F__in_task_view__%253DjdLiteiOS%2526lng%253D116.451866%2526lat%253D25.666968%2526sid%253D212fc988f8a1ee19b14166379c63f7fw%2526un_area%253D16_1362_1365_45002%22%2C%22userArea%22%3A%22-1%22%2C%22client%22%3A%22-1%22%2C%22clientVersion%22%3A%22-1%22%2C%22uuid%22%3A%22-1%22%2C%22osVersion%22%3A%22-1%22%2C%22brand%22%3A%22-1%22%2C%22model%22%3A%22-1%22%2C%22networkType%22%3A%22-1%22%2C%22jda%22%3A%2271854095.15939393960041822512964.1593939396.1638348252.1638439161.661%22%2C%22sdkToken%22%3A%22%22%2C%22token%22%3A%226VAELTG2E5G5VIGIMTRZPUSNWPLYXZYMNYRCUTXD5TABJPHTFGWXDAMOUOSHRXRW4YWHFE63OOWOO%22%2C%22jstub%22%3A%22HKIKU5VRNNHQNNCUUFPIGJJWURTWPZFSMWUWCE7ED5N77JBEW4Y6MZCH3XJRREKHKK3WMRRXY6BXAFQW73KOVLGCL5GDHN2WXQVZZRI%22%2C%22pageClick%22%3A%22Babel_Coupon%22%2C%22couponSource%22%3A%22manual%22%2C%22couponSourceDetail%22%3A%22-100%22%2C%22channel%22%3A%22%E9%80%9A%E5%A4%A9%E5%A1%94%E4%BC%9A%E5%9C%BA%22%2C%22headArea%22%3A%22605715ec560d6508f7403b91b677d79c%22%2C%22mitemAddrId%22%3A%22%22%2C%22geo%22%3A%7B%22lng%22%3A%22116.451866%22%2C%22lat%22%3A%2225.666968%22%7D%2C%22addressId%22%3A%22%22%2C%22posLng%22%3A%22%22%2C%22posLat%22%3A%22%22%2C%22focus%22%3A%22%22%2C%22innerAnchor%22%3A%22%22%2C%22cv%22%3A%222.0%22%7D&screen=750*1334&client=wh5&clientVersion=1.0.0&sid=212fc988f8a1ee19b14166379c63f7fw&uuid=15939393960041822512964.933.1638441709346&area=16_1362_1365_45002"
+    body: "body=%7B%22activityId%22%3A%223H885vA4sQj6ctYzzPVix4iiYN2P%22%2C%22scene%22%3A%221%22%2C%22args%22%3A%22key%3DFDF7FA447E0C85BE16475D5AB7C03753A483085CE33EE8BD9CAA1C531332C968E951C9253FD1EED7C982415A80554532_babel%2CroleId%3D05AFB783B4F35E96FF2F37CF664DD0B8_babel%2CstrengthenKey%3D281033DADF9F63C5ED2419FA001BEB0EFA083B6E82C395456F9A70404998DD09731FC6D9394E86067CE219F706DC0C76_babel%22%2C%22platform%22%3A%221%22%2C%22orgType%22%3A%222%22%2C%22openId%22%3A%22-1%22%2C%22pageClickKey%22%3A%22-1%22%2C%22eid%22%3A%222K2R5LUAOZLJEGUOKOLKJESKGW3PNC4WENTZX5J3AD5DGPJ43PVTJAKCCDGRSW4T4L3TEYIMPXYCCZLESFIBSEINQU%22%2C%22fp%22%3A%224daa590d72a7241bef74761ec6093a3d%22%2C%22shshshfp%22%3A%227fc81698acaa5ac96adc27bfdcf23a90%22%2C%22shshshfpa%22%3A%2251ffb3d7-f639-517a-db55-de017de82f24-1593939396%22%2C%22shshshfpb%22%3A%22pXq9bWYgnr90io6zFeE2x5g%3D%3D%22%2C%22childActivityUrl%22%3A%22https%253A%252F%252Fpro.m.jd.com%252Fjdlite%252Factive%252F3H885vA4sQj6ctYzzPVix4iiYN2P%252Findex.html%253F__in_task_view__%253DjdLiteiOS%2526lng%253D116.451867%2526lat%253D25.667044%2526sid%253D212fc988f8a1ee19b14166379c63f7fw%2526un_area%253D16_1362_1365_45002%22%2C%22userArea%22%3A%22-1%22%2C%22client%22%3A%22-1%22%2C%22clientVersion%22%3A%22-1%22%2C%22uuid%22%3A%22-1%22%2C%22osVersion%22%3A%22-1%22%2C%22brand%22%3A%22-1%22%2C%22model%22%3A%22-1%22%2C%22networkType%22%3A%22-1%22%2C%22jda%22%3A%2271854095.15939393960041822512964.1593939396.1638511848.1638516446.664%22%2C%22sdkToken%22%3A%22%22%2C%22token%22%3A%224ZY4C4NCOPU2R32JMCSUPW4K7GAFVB5A6R6WTYHOMMTPCVH46EZ6XEVTWGQJU4OF6B3HI3IZ26MHC%22%2C%22jstub%22%3A%22NTG3TCK5CQ73CHDL6DOQH5DQFVLYLBH45PBOASEP4SGLUQEP22JTURDRWZ3PKDFUH3NQQZ5E3JRM2PUSQTFISXOIXN2OG4IIPEBP7CA%22%2C%22pageClick%22%3A%22Babel_Coupon%22%2C%22couponSource%22%3A%22manual%22%2C%22couponSourceDetail%22%3A%22-100%22%2C%22channel%22%3A%22%E9%80%9A%E5%A4%A9%E5%A1%94%E4%BC%9A%E5%9C%BA%22%2C%22headArea%22%3A%22605715ec560d6508f7403b91b677d79c%22%2C%22mitemAddrId%22%3A%22%22%2C%22geo%22%3A%7B%22lng%22%3A%22116.451867%22%2C%22lat%22%3A%2225.667044%22%7D%2C%22addressId%22%3A%22%22%2C%22posLng%22%3A%22%22%2C%22posLat%22%3A%22%22%2C%22focus%22%3A%22%22%2C%22innerAnchor%22%3A%22%22%2C%22cv%22%3A%222.0%22%7D&screen=750*1334&client=wh5&clientVersion=1.0.0&sid=212fc988f8a1ee19b14166379c63f7fw&uuid=15939393960041822512964.935.1638516451812&area=16_1362_1365_45002"
   }
 }
 
