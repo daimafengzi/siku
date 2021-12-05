@@ -20,10 +20,10 @@ cookiesList = [cookies1, ]   # 多账号准备
 # 默认不自动提现
 autoTakeOut = False
 # 提现金额
-amount = 20
+amount = 5
 takeOutType = 1
 # 提现账户: 1 -> 支付宝 2 -> 微信
-thirdPayType = 1
+thirdPayType = 2
 
 # ac读取环境变量
 if "XMLY_SPEED_COOKIE" in os.environ:
@@ -37,10 +37,10 @@ if "AUTO_TAKE_OUT" in os.environ:
     autoTakeOut = os.environ["AUTO_TAKE_OUT"]
 
 # 自定义设备命名,非必须 ;devices=["iPhone7P","huawei"];与cookiesList对应
-devices = []
-notify_time = 23                            # 通知时间,24小时制,默认19
+devices = ["iPhone"]
+notify_time = 24                           # 通知时间,24小时制,默认19
 XMLY_ACCUMULATE_TIME = 1                    # 希望刷时长的,此处置1,默认打开;关闭置0
-UserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 13_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 iting/1.0.12 kdtunion_iting/1.0 iting(main)/1.0.12/ios_1"
+UserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 iting/2.3.10 kdtunion_iting/1.0 iting(main)/2.3.10/ios_1 ;xmly(lite)/2.3.10/ios_1"
 # 非iOS设备的需要的自行修改,自己抓包 与cookie形式类似
 
 def str2dict(str_cookie):
@@ -84,7 +84,7 @@ def read(cookies):
         'Host': '51gzdhh.xyz',
         'accept': 'application/json, text/plain, */*',
         'origin': 'http://xiaokuohao.work',
-        'user-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; MI 6 Plus Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/52.0.2743.100 Mobile Safari/537.36 iting(main)/1.8.18/android_1 kdtUnion_iting/1.8.18',
+        'User-Agent': UserAgent,
         'referer': 'http://xiaokuohao.work/static/web/dxmly/index.html',
         'accept-encoding': 'gzip, deflate',
         'accept-language': 'zh-CN,en-US;q=0.8',
@@ -106,7 +106,7 @@ def read(cookies):
         'content-length': '37',
         'accept': 'application/json, text/plain, */*',
         'origin': 'http://xiaokuohao.work',
-        'user-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; MI 6 Plus Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/52.0.2743.100 Mobile Safari/537.36 iting(main)/1.8.18/android_1 kdtUnion_iting/1.8.18',
+        'User-Agent': UserAgent,
         'content-type': 'application/x-www-form-urlencoded',
         'referer': 'http://xiaokuohao.work/static/web/dxmly/index.html',
         'accept-encoding': 'gzip, deflate',
@@ -133,7 +133,7 @@ def read(cookies):
         'Host': '51gzdhh.xyz',
         'accept': 'application/json, text/plain, */*',
         'origin': 'http://xiaokuohao.work',
-        'user-agent': 'Mozilla/5.0 (Linux; Android 6.0.1; MI 6 Plus Build/V417IR; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/52.0.2743.100 Mobile Safari/537.36 iting(main)/1.8.18/android_1 kdtUnion_iting/1.8.18',
+        'User-Agent': UserAgent,
         'referer': 'http://xiaokuohao.work/static/web/dxmly/index.html',
         'accept-encoding': 'gzip, deflate',
         'accept-language': 'zh-CN,en-US;q=0.8',
@@ -743,7 +743,7 @@ def saveListenTime(cookies, date_stamp):
 def listenData(cookies, date_stamp):
     print("\n【刷时长2】")
     headers = {
-        'User-Agent': 'ting_v1.1.9_c5(CFNetwork, iOS 14.0.1, iPhone9,2)',
+        'User-Agent': 'ting_v2.3.10_c5(CFNetwork, iOS 15.1, iPhone10,3) ;xmly(lite)/2.3.10/ios_1',
         'Host': 'm.ximalaya.com',
         'Content-Type': 'application/json',
     }
@@ -988,7 +988,7 @@ def task_out(cookies, body):
         'Content-Type': 'application/json;charset=utf-8',
         'Connection': 'keep-alive',
         'Accept': 'application/json, text/plain, */*',
-        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 iting/2.0.3 kdtunion_iting/1.0 iting(main)/2.0.3/ios_1',
+        'User-Agent': UserAgent,
         'Referer': 'https://m.ximalaya.com/growth-ssr-speed-welfare-center/page/withdraw',
         'Accept-Language': 'zh-cn',
         'Accept-Encoding': 'gzip, deflate, br',
@@ -1007,7 +1007,7 @@ def user_info(cookies):
     headers = {
         'Host': 'mobile.ximalaya.com',
         'Accept': '*/*',
-        'User-Agent': 'ting_v2.1.3_c5(CFNetwork, iOS 14.4, iPhone13,2)',
+        'User-Agent': 'ting_v2.3.10_c5(CFNetwork, iOS 15.1, iPhone10,3) ;xmly(lite)/2.3.10/ios_1',
         'Accept-Language': 'zh-cn',
         'Accept-Encoding': 'gzip, deflate, br',
     }
