@@ -96,9 +96,7 @@ def read(cookies):
     try:
         response = requests_session().get(
             'https://51gzdhh.xyz/api/new/newConfig', headers=headers, params=params)
-    except:
-        print("网络请求异常,为避免GitHub action报错,直接跳过")
-        return
+
     result = response.json()
     pid = str(result["pid"])
     headers = {
@@ -118,9 +116,7 @@ def read(cookies):
     try:
         response = requests_session().post(
             'https://51gzdhh.xyz/api/new/hui/complete', headers=headers, data=json.dumps(data))
-    except:
-        print("网络请求异常,为避免GitHub action报错,直接跳过")
-        return
+
     result = response.json()
     if result["status"] == -2:
         # print("无法阅读,尝试从安卓端手动开启")
@@ -150,9 +146,7 @@ def read(cookies):
     try:
         response = requests_session().get(
             'https://51gzdhh.xyz/new/userCompleteNew', headers=headers, params=params)
-    except:
-        print("网络请求异常,为避免GitHub action报错,直接跳过")
-        return 0
+
     result = response.json()
     print(result)
 
