@@ -113,7 +113,7 @@ function getacc() {
       } catch (e) {
         $.msg($.name, `获取账号信息: 失败`, `说明: ${e}`)
         $.log(`❌ ${$.name} getacc - 获取账号信息失败: ${e}`)
-        $.log(`❌ ${$.name} getacc - response: ${JSON.stringify(response)}`)
+        //$.log(`❌ ${$.name} getacc - response: ${JSON.stringify(response)}`)
         resolve()
       }
     })
