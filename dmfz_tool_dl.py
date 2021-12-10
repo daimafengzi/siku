@@ -40,7 +40,7 @@ def getTool(toolName, a=0):
         else:
             print(f"下载失败：{toolName}")
 
-if __name__ == '__main__':
+if __name__ == '__qq__':
     file_name = ['USER_AGENTS.js', 'jdCookie.js', 'JS_USER_AGENTS.js', 'sendNotify.js']
     for f in file_name:
         if os.path.exists(f):
