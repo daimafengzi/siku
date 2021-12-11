@@ -36,7 +36,7 @@ var timestamp = Math.round(new Date().getTime()/1000).toString();
           console.log(`\n开始【喜马拉雅${$.index}】`)
           //$.log(XMLY_SPEED_COOKIEs)
 		await ptqdchaxun()
-		await txqiandao()
+		//await txqiandao()
 	        }
       }
 })()
@@ -90,7 +90,7 @@ function ptqdchaxun() {
 		let subTitle = ''
 		let detail = ''
 		if ($.signinfo.info.isTickedToday == false) {
-		ptqdchaxun();
+		txqiandao();
 		if ($.signinfo.sign.data.status == 0) {
 		  subTitle = '签到: 成功'
 		  detail = `当前连签: ${$.signinfo.info.continuousDays + 1}天, 积分: ${$.signinfo.info.awardAmount}`
