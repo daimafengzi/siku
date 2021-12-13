@@ -56,7 +56,7 @@ let tz = ($.getval('tz') || '1');//通知
 const invited = '';
 let lTadlist = '15884282854261489762';
 let gRadlist = '15884282854261489762';
-let eXadlist = '15884282854261489762';
+let eXadlist = '17652965181311583995';
 var message='';
 
 if ($.isNode()) {
@@ -255,7 +255,7 @@ return new Promise((resolve, reject) => {
           message +='🎉'+result.data.title+','+result.data.subtitle+'\n'
   
 }     else{
-          message += '⚠️异常:'+result.message+'\n'
+          message += '⚠️签到异常:'+result.message+'\n'
 }
           resolve()
     })
@@ -281,11 +281,11 @@ return new Promise((resolve, reject) => {
       if(logs) $.log(data)
         message += '📣超级大转盘\n'
       if(result.message == 'success') {
-        message += '🔔恭喜获得:'+result.data.content+','
+        message += '🔔超级大转盘恭喜获得:'+result.data.content+','
         lTadlist = result.data.adPondInfo.adInfos[0].adLlsid
         }
       else{
-        message += '⚠️异常:'+result.message+'\n'
+        message += '⚠️超级大转盘异常:'+result.message+'\n'
         }
           resolve()
     })
@@ -317,7 +317,7 @@ return new Promise((resolve, reject) => {
         message += +result.data.coins+'金币\n'
         }
       else{
-        message +='⚠️异常:'+result.message+'\n'
+        message +='⚠️大转盘双倍or神秘宝箱异常:'+result.message+'\n'
            }
           resolve()
     })
@@ -344,7 +344,7 @@ return new Promise((resolve, reject) => {
         message += result.data.title+',获得:'+result.data.coins+'金币\n'
         }
       else{
-        message +='⚠️异常:'+result.message+'\n'
+        message +='⚠️时段奖励异常:'+result.message+'\n'
            }
           resolve()
     })
@@ -373,7 +373,7 @@ return new Promise((resolve, reject) => {
         message += result.data.adPondInfo.buttonText+'\n'
         gRadlist = result.data.adPondInfo.adInfos[0].adLlsid
         }else{
-        message +='⚠️异常:'+result.message+'\n'
+        message +='⚠️红包雨异常:'+result.message+'\n'
            }
           resolve()
     })
@@ -400,7 +400,7 @@ return new Promise((resolve, reject) => {
         message += result.data.coins+'金币\n'
         }
       else{
-        message +='⚠️异常:'+result.message+'\n'
+        message +='⚠️红包雨奖励异常:'+result.message+'\n'
            }
           resolve()
     })
@@ -459,7 +459,7 @@ return new Promise((resolve, reject) => {
         message += result.data.toast+'\n'
         }
       else{
-        message +='⚠️异常:'+result.message+'\n'
+        message +='⚠️金币悬赏任务异常:'+result.message+'\n'
            }
           resolve()
     })
