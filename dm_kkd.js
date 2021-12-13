@@ -23,7 +23,7 @@ KKDCOOKIE-kkdcookie
 KKDSIGN-kkgsign
 
 [Script]
-cron "8 0,6,12,18,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=快看点
+cron "8 0,20 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=快看点
 
 [mitm]
 hostname = api.yuncheapp.cn
