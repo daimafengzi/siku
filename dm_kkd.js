@@ -140,7 +140,7 @@ if (!kkdcookieArr[0]) {
       $.index = i + 1;
       console.log(`\n开始【快看点${$.index}】`)
       await userinfo()
-      await signin()
+      //await signin()
       await control()
       await intervalAward()
       await lotteryTable()
@@ -245,6 +245,7 @@ return new Promise((resolve, reject) => {
           },
      body:'{}'
 }
+   console.log(signinurl);
    $.get(signinurl,(error, response, data) =>{
      const result = JSON.parse(data)
       if(logs) $.log(data)
