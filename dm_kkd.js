@@ -22,6 +22,9 @@ KKDHEADER-kkdheader
 KKDCOOKIE-kkdcookie
 KKDSIGN-kkgsign
 
+[Script]
+cron "8 0,6,12,18,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=快看点
+
 [mitm]
 hostname = api.yuncheapp.cn
 #圈x
@@ -140,7 +143,7 @@ if (!kkdcookieArr[0]) {
       $.index = i + 1;
       console.log(`\n开始【快看点${$.index}】`)
       await userinfo()
-      //await signin()
+      await signin()
       await control()
       await intervalAward()
       await lotteryTable()
@@ -242,10 +245,8 @@ return new Promise((resolve, reject) => {
               'Content-Type': 'application/json',
               'Host': 'api.yuncheapp.cn',
               'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 12_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'
-          },
-     body:'{}'
+          }
 }
-   console.log(signinurl);
    $.get(signinurl,(error, response, data) =>{
      const result = JSON.parse(data)
       if(logs) $.log(data)
@@ -254,7 +255,7 @@ return new Promise((resolve, reject) => {
           message +='🎉'+result.data.title+','+result.data.subtitle+'\n'
   
 }     else{
-          message += '⚠️异常'+result.message+'\n'
+          message += '⚠️异常:'+result.message+'\n'
 }
           resolve()
     })
