@@ -4,9 +4,9 @@ export XMLY_SPEED_COOKIE='{"Cookie":"xz_jkd_appkey=替换的CK"}'
 多账号用&隔开
 */
 // [task_local]
-// */60 * * * * http://47.101.146.160/scripts/jkd.js, tag=快手极速版, img-url=circles.hexagongrid.fill.system, enabled=true
+// */60 * * * * http://47.101.146.160/scripts/jkd.js, tag=快手果园助力, img-url=circles.hexagongrid.fill.system, enabled=true
 
-const $ = new Env('快手极速版');
+const $ = new Env('快手果园助力');
 const notify = $.isNode() ? require('./sendNotify') : '';
 let XMLY_SPEED_COOKIEArr = [],message, allMessage = '';
 let XMLY_SPEED_COOKIE= $.isNode() ? (process.env.XMLY_SPEED_COOKIE ? process.env.XMLY_SPEED_COOKIE : "") : ($.getdata('XMLY_SPEED_COOKIE') ? $.getdata('XMLY_SPEED_COOKIE') : "")
@@ -33,7 +33,7 @@ var timestamp = Math.round(new Date().getTime()/1000).toString();
 	        for (let k = 0; k < XMLY_SPEED_COOKIEArr.length; k++) {
                 XMLY_SPEED_COOKIE = XMLY_SPEED_COOKIEArr[k]
                 $.index = k + 1;
-          console.log(`\n开始【快手极速版${$.index}】`)
+          console.log(`\n开始【快手果园助力${$.index}】`)
           //$.log(XMLY_SPEED_COOKIEs)
 		//await ptqdchaxun()
 		//await txqiandao()
