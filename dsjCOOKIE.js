@@ -66,7 +66,7 @@ module.exports = {
   "favIconColor": "grey",
   "datas": [{
     "key": "dsjheader",
-    "val": "填你的CK"
+    "val": "{'uuid':'7fb1c84daa321144','authorization':'TWpnMU5UbGlPRFJrTTJZNVpETTJaRFF4Tm1JMlpUQm1NekF3TVdRMVptWT18MTY0MDA1ODM3MTg0MDU1Njg5MHxmMDc3N2Q3NjFmZjM5YTAxMTc3NzNmMTgyOTQ5YzNmMDFmNTZiY2E5'}"
   }, {
     "key": "dsjheader2",
     "val": ""
