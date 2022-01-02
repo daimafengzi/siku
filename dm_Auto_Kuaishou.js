@@ -9,7 +9,7 @@ Github Actions使用方法见[@lxk0301](https://raw.githubusercontent.com/lxk030
 
 */
 
-const $ = new Env("快手视频")
+const $ = new Env("快手刷视频")
 
 let ksUrl = [], ksArr = [];
 
