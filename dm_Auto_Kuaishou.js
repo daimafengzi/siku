@@ -40,7 +40,7 @@ let ksUrl = [], ksArr = [];
     if (ksArr[i]) {
       playUrl = ksArr[i];
       $.index = i + 1;
-	 console.log(playUrl)
+	//console.log(playUrl)
     console.log(`-------------------------\n\n开始快手极速版第${$.index}个视频`)
     }
      for (let j = 0; j < 5; j++) {
