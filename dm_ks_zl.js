@@ -1,12 +1,12 @@
 /*
-快手化肥助力
+快手果园化肥助力
 循环助力
 
 
 [Script]
-cron "30 0 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手化肥助力
+cron "30 0 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手果园化肥助力
 */
-const $ = new Env('快手化肥助力')
+const $ = new Env('快手果园化肥助力')
 let cookieArr = [];
 let KS_SHARECODEArr = [], message, allMessage = '';
 if ($.isNode()) {
