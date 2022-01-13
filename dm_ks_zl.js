@@ -1,12 +1,11 @@
 /*
-快手果园化肥助力
+快手化肥助力
 循环助力
 
-
 [Script]
-cron "30 0 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手果园化肥助力
+cron "30 0 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手化肥助力
 */
-const $ = new Env('快手果园化肥助力')
+const $ = new Env('快手化肥助力')
 let cookieArr = [];
 let KS_SHARECODEArr = [], message, allMessage = '';
 if ($.isNode()) {
@@ -56,7 +55,56 @@ if (isGetCookie) {
 	  zhanghao = cookieArr.length
       console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}=============\n`)
 	   console.log(`============ 共计${zhanghao}个账号，将进行循环助力  =============\n`)
+	   console.log(`-------------------------\n\n默认第一次助力作者。`);
+	   await getAuthorShareCode();
   }
+//默认第一次助力作者
+function getAuthorShareCode() {
+    return new Promise(resolve => {
+        $.get({
+            url: "https://raw.githubusercontent.com/daimafengzi/siku/shareCodes/ks.json",
+            headers: {
+                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+            }
+        }, async (err, resp, data) => {
+            try {
+                if (err) {
+                    console.log(`${JSON.stringify(err)}`);
+                    console.log(`${$.name} API请求失败，请检查网路重试`);
+                } else {
+			//console.log(data);
+			//拆分助力码
+			var regex = /\s+|,|@|#/;
+			var datals = data.split(regex);
+			//console.log(KS_SHARECODEVals[0]);
+			//console.log(KS_SHARECODEVals[1]);
+			fid = datals[0]
+			shareObjectId = datals[1]
+		  //拆分助力码结束
+		  //账号循环
+			for (let i = 0; i < cookieArr.length; i++) {
+				if (cookieArr[i]) {
+				  cookieVal = cookieArr[i];
+				  $.index = i + 1;
+				//console.log(fid);
+				//console.log(shareObjectId);
+				console.log(`-------------------------\n\n默认第一次助力作者。【账号${$.index}】开始助力作者`);
+				 await officialSign();
+				 await(10000);
+			   }
+			 }
+		  //账号循环结束
+                }
+            } catch (e) {
+                $.logErr(e, resp)
+            } finally {
+                resolve();
+            }
+        })
+    })
+}
+
+//默认第一次助力作者结束
 //助力码循环开始
 	 for (let ix = 0; ix < KS_SHARECODEArr.length; ix++) {
 		if (KS_SHARECODEArr[ix]) {
@@ -77,6 +125,7 @@ if (isGetCookie) {
 				  $.index = i + 1;
 				   console.log(`-------------------------\n\n【账号${$.index}】开始助力第：${ix + 1} 个助力码${KS_SHARECODEVal}`)
 				 await officialSign();
+				 await(10000);
 			   }
 			 }
 		  //账号循环结束
@@ -100,7 +149,7 @@ function  officialSign() {
           body: '{"fid":"'+fid+'","cc":"panelPoster","followRefer":"151","shareMethod":"PICTURE","sharePosition":"MANURE_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_MANURE_SHARE","shareId":"16703611985933","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16703611985933","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
    }
     $.post(signurl, (error, response, data) => {
-		data = JSON.parse(data)
+		data = JSON.parse(data);
 		console.log(data.data.popupEventList);
        resolve()
       })
