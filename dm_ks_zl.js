@@ -82,7 +82,7 @@ function getAuthorShareCode() {
 			shareObjectId = datals[1]
 		  //拆分助力码结束
 		  //账号循环
-			for (let i = 0; i < cookieArr.length; i++) {
+			for (let i = 0; i < 8; i++) {
 				if (cookieArr[i]) {
 				  cookieVal = cookieArr[i];
 				  $.index = i + 1;
