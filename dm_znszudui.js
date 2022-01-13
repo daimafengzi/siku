@@ -6,10 +6,10 @@
 
 ================Loon==============
 [Script]
-cron "55 59 7,10,13,15,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=京东极速版10减4优惠券
+cron "55 59 7,10,13,15,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=炸年兽组队
 
  */
-const $ = new Env('京东极速版10减4优惠券');
+const $ = new Env('炸年兽组队');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
