@@ -83,7 +83,7 @@ function getAuthorShareCode() {
 		  //拆分助力码结束
 		  //账号一助力水滴
 				  cookieVal = cookieArr[0];
-				  console.log(`-------------------------\n\n默认第一次助力作者。【账号${$.index}】开始助力作者`);
+				  console.log(`-------------------------\n\n默认第一次助力作者。【账号一】开始助力作者`);
 				 await officialSign();
 
 		  //账号一助力水滴结束
@@ -114,7 +114,7 @@ function getAuthorShareCode() {
 		  //拆分助力码结束
 		  //账号一助力水滴
 				  cookieVal = cookieArr[0];
-				   console.log(`-------------------------\n\n【账号一】开始助力第：${ix + 1} 个助力码${KS_SHARECODEVal}`)
+				   console.log(`-------------------------\n\n【账号${$.index}】开始助力第：${ix + 1} 个助力码${KS_SHARECODEVal}`)
 				 await officialSign();
 
 		  //账号一助力水滴结束
