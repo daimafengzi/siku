@@ -1,28 +1,28 @@
 /*
-京东极速版签到+赚现金任务
+京东极速版任务签到+赚现金任务
 每日9毛左右，满3，10，50可兑换无门槛红包
 ⚠️⚠️⚠️一个号需要运行40分钟左右
 
 活动时间：长期
-活动入口：京东极速版app-现金签到
+活动入口：京东极速版任务app-现金签到
 已支持IOS双京东账号,Node.js支持N个京东账号
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
-#京东极速版
-18 3,8,13,20 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js, tag=京东极速版, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
+#京东极速版任务
+18 3,8,13,20 * * * https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js, tag=京东极速版任务, img-url=https://raw.githubusercontent.com/Orz-3/task/master/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "18 3,8,13,20 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js,tag=京东极速版
+cron "18 3,8,13,20 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js,tag=京东极速版任务
 
 ===============Surge=================
-京东极速版 = type=cron,cronexp="18 3,8,13,20 * * *",wake-system=1,timeout=33600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js
+京东极速版任务 = type=cron,cronexp="18 3,8,13,20 * * *",wake-system=1,timeout=33600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js
 
 ============小火箭=========
-京东极速版 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js, cronexpr="18 3,8,13,20 * * *", timeout=33600, enable=true
+京东极速版任务 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js, cronexpr="18 3,8,13,20 * * *", timeout=33600, enable=true
 */
-const $ = new Env('京东极速版');
+const $ = new Env('京东极速版任务');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
@@ -99,7 +99,7 @@ async function jdGlobal() {
 
 function showMsg() {
   return new Promise(resolve => {
-    message += `本次运行获得${$.score}金币，共计${$.total}金币\n可兑换 ${($.total/10000).toFixed(2)} 元京东红包\n兑换入口：京东极速版->我的->金币`
+    message += `本次运行获得${$.score}金币，共计${$.total}金币\n可兑换 ${($.total/10000).toFixed(2)} 元京东红包\n兑换入口：京东极速版任务->我的->金币`
     $.msg($.name, '', `京东账号${$.index}${$.nickName}\n${message}`);
     resolve()
   })
