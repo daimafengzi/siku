@@ -98,7 +98,7 @@ async function jstoken() {
 			//console.log(data);//打印出需要签到的物品详情--完全。
 			data = JSON.stringify(data.data.signFreeOrderInfoList);
 			data = JSON.parse(data);
-			//console.log(data);//打印出需要签到的物品详情。
+			console.log(data);//打印出需要签到的物品详情。
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
 			//console.log(obj1[cishu].combination);//打印对应ID是否需要签到。
