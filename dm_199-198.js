@@ -6,7 +6,7 @@
 
 ================Loon==============
 [Script]
-cron "55 59 7,10,13,15,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=伊利199-198元优惠券
+cron "55 59 0,10,16,20,22 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=伊利199-198元优惠券
 
  */
 const $ = new Env('伊利199-198元优惠券');
