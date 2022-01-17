@@ -105,11 +105,11 @@ function taskUrl(function_id, body = {}) {
       "Connection": "keep-alive",
       "Content-Type": "application/x-www-form-urlencoded",
       'origin': 'https://lzkjdz-isv.isvjcloud.com',
-      "Referer": "https://lzkjdz-isv.isvjcloud.com/mengniu/pointRedeem/viewOpenCouponSet?activityId=2005100001480301&jxsid=16423440868675502337",
+      "Referer": "https://lzkjdz-isv.isvjcloud.com/yili/pointRedeem/viewOpenCouponSet?tttparams=f2YLnleyJncHNfYXJlYSI6IjE2XzEzNjJfMTM2NV80NTAwMiIsInByc3RhdGUiOiIwIiwidW5fYXJlYSI6IjE2XzEzNjJfMTM2NV80NTAwMiIsIm1vZGVsIjoiaVBob25lMTAsMyIsImdMYXQiOiIyNS42NDYzMjEiLCJnTG5nIjoiMTE2LjQyMDcwNyIsImxuZyI6IjExNi40NTE4NjciLCJsYXQiOiIyNS42NjY5NjMifQ6%3D%3D&sid=b188629135d229308b82836f334b171w&un_area=16_1362_1365_45002",
       "Cookie": cookie,
       "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
     },
-    body: "pin=vbPHpi6J01javiUX9qRjSk7oeVP9kq2pYSH90mYt4m3fwcJlClpxrfmVYaGKuquQkdK3rLBQpEQH9V4tdrrh0w%3D%3D&venderId=1000014803&couponId=480321043002"
+    body: "pin=vbPHpi6J01javiUX9qRjSk7oeVP9kq2pYSH90mYt4m3fwcJlClpxrfmVYaGKuquQkdK3rLBQpEQH9V4tdrrh0w%3D%3D&venderId=1000013402&couponId=340221123101"
   }
 }
 
