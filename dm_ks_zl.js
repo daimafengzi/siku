@@ -3,7 +3,7 @@
 循环助力
 
 [Script]
-cron "30 0 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手化肥助力
+cron "30 0 1,8,15,22,29 * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手化肥助力
 */
 const $ = new Env('快手化肥助力')
 let cookieArr = [];
