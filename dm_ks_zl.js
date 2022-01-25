@@ -149,8 +149,8 @@ function  officialSign() {
         body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"MANURE_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_MANURE_SHARE","shareId":"16736120466884","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16736120466884","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
    }
     $.post(signurl, (error, response, data) => {
-		//console.log(data);
-		console.log("化肥助力");
+		console.log(data);
+		//console.log("化肥助力");
        resolve()
       })
    })
@@ -164,8 +164,8 @@ function  officialSign2() {
         body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"WATER_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_WATER_SHARE","shareId":"16735759208785","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16735759208785","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
    }
     $.post(signurl, (error, response, data) => {
-		//console.log(data);
-		console.log("水滴助力");
+		console.log(data);
+		//console.log("水滴助力");
        resolve()
       })
    })
