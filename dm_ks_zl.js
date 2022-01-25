@@ -82,7 +82,7 @@ function getAuthorShareCode() {
 			shareObjectId = datals[1]
 		  //拆分助力码结束
 		  //账号循环
-			for (let i = 0; i < 8; i++) {
+			for (let i = 0; i < cookieArr.length; i++) {
 				if (cookieArr[i]) {
 				  cookieVal = cookieArr[i];
 				  $.index = i + 1;
@@ -119,7 +119,7 @@ function getAuthorShareCode() {
 			shareObjectId = KS_SHARECODEVals[1]
 		  //拆分助力码结束
 		  //账号循环
-			for (let i = 0; i < 8; i++) {
+			for (let i = 0; i < cookieArr.length; i++) {
 				if (cookieArr[i]) {
 				  cookieVal = cookieArr[i];
 				  $.index = i + 1;
@@ -145,8 +145,7 @@ function  officialSign() {
 	 let signurl = {
 		url: 'https://ug-fission.kuaishou.com/rest/n/darwin/orchard/overview',
 	    headers: {Cookie: cookieVal.replace('kpn=NEBULA', 'kpn=KUAISHOU'),'Content-Type': 'application/json;charset=utf-8'},
-          //body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"MANURE_TASK_INVITE","kpn":"NEBULA","subBiz":"OD_ACT_INVITE","shareId":"16726848307579","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16726848307579","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
-		  body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"MANURE_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_MANURE_SHARE","shareId":"16736120466884","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16736120466884","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
+        body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"MANURE_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_MANURE_SHARE","shareId":"16736120466884","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16736120466884","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
    }
     $.post(signurl, (error, response, data) => {
 		//data = JSON.parse(data);
