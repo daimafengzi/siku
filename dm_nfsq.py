@@ -1,4 +1,9 @@
 # -*- coding: utf8 -*-
+
+
+#cron "3 9 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=农夫山泉小程序抽奖
+
+
 import requests
 from time import sleep
 from json import dumps
