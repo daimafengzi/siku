@@ -165,7 +165,7 @@ function  officialSign2() {
    }
     $.post(signurl, (error, response, data) => {
 		//console.log(data);
-		console.log(水滴助力);
+		console.log("水滴助力");
        resolve()
       })
    })
