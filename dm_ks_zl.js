@@ -146,7 +146,7 @@ function  officialSign() {
 	 let signurl = {
 		url: 'https://ug-fission.kuaishou.com/rest/n/darwin/orchard/overview',
 	    headers: {Cookie: cookieVal.replace('kpn=NEBULA', 'kpn=KUAISHOU'),'Content-Type': 'application/json;charset=utf-8'},
-        body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"MANURE_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_MANURE_SHARE","shareId":"16736120466884","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16736120466884","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
+        body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"MANURE_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_MANURE_SHARE","shareId":"16767952005430","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16767952005430","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
    }
     $.post(signurl, (error, response, data) => {
 		console.log(data);
@@ -161,7 +161,7 @@ function  officialSign2() {
 	 let signurl = {
 		url: 'https://ug-fission.kuaishou.com/rest/n/darwin/orchard/overview',
 	    headers: {Cookie: cookieVal.replace('kpn=NEBULA', 'kpn=KUAISHOU'),'Content-Type': 'application/json;charset=utf-8'},
-        body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"WATER_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_WATER_SHARE","shareId":"16735759208785","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16735759208785","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
+        body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"WATER_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_WATER_SHARE","shareId":"16767950760790","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16767950760790","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
    }
     $.post(signurl, (error, response, data) => {
 		console.log(data);
