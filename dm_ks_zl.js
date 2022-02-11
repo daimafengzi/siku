@@ -113,8 +113,8 @@ function getAuthorShareCode() {
 		  //拆分助力码
 			var regex = /\s+|,|@|#/;
 			var KS_SHARECODEVals = KS_SHARECODEVal.split(regex);
-			console.log(KS_SHARECODEVals[0]);
-			console.log(KS_SHARECODEVals[1]);
+			//console.log(KS_SHARECODEVals[0]);
+			//console.log(KS_SHARECODEVals[1]);
 			fid = KS_SHARECODEVals[0]
 			shareObjectId = KS_SHARECODEVals[1]
 		  //拆分助力码结束
