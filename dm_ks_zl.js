@@ -105,36 +105,6 @@ function getAuthorShareCode() {
 }
 
 //默认第一次助力作者结束
-//助力码循环开始
-	 for (let ix = 0; ix < KS_SHARECODEArr.length; ix++) {
-		if (KS_SHARECODEArr[ix]) {
-		  KS_SHARECODEVal = KS_SHARECODEArr[ix];
-		  console.log(`---------------------------------\n\n第：${ix + 1} 个助力码为：${KS_SHARECODEVal}`)
-		  //拆分助力码
-			var regex = /\s+|,|@|#/;
-			var KS_SHARECODEVals = KS_SHARECODEVal.split(regex);
-			//console.log(KS_SHARECODEVals[0]);
-			//console.log(KS_SHARECODEVals[1]);
-			fid = KS_SHARECODEVals[0]
-			shareObjectId = KS_SHARECODEVals[1]
-		  //拆分助力码结束
-		  //账号循环
-			for (let i = 0; i < cookieArr.length; i++) {
-				if (cookieArr[i]) {
-				  cookieVal = cookieArr[i];
-				  $.index = i + 1;
-				   console.log(`-------------------------\n\n【账号${$.index}】开始助力第：${ix + 1} 个助力码${KS_SHARECODEVal}`)
-				 await officialSign();
-				 await(30000);
-				 await officialSign2();
-			   }
-			 }
-		  //账号循环结束
-		  $.indexs = ix + 1;
-	   }
-	 }
-
-//助力码循环结束
 })().catch((e) => $.logErr(e))
     .finally(() => {
       $.name = $.oldName;
@@ -146,7 +116,7 @@ function  officialSign() {
 	 let signurl = {
 		url: 'https://ug-fission.kuaishou.com/rest/n/darwin/orchard/overview',
 	    headers: {Cookie: cookieVal.replace('kpn=NEBULA', 'kpn=KUAISHOU'),'Content-Type': 'application/json;charset=utf-8'},
-        body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"MANURE_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_MANURE_SHARE","shareId":"16767952005430","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16767952005430","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
+        body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"MANURE_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_MANURE_SHARE","shareId":"16784865216869","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16784865216869","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
    }
     $.post(signurl, (error, response, data) => {
 		console.log(data);
@@ -161,7 +131,7 @@ function  officialSign2() {
 	 let signurl = {
 		url: 'https://ug-fission.kuaishou.com/rest/n/darwin/orchard/overview',
 	    headers: {Cookie: cookieVal.replace('kpn=NEBULA', 'kpn=KUAISHOU'),'Content-Type': 'application/json;charset=utf-8'},
-        body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"WATER_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_WATER_SHARE","shareId":"16767950760790","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16767950760790","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
+        body: '{"fid":"'+fid+'","cc":"share_copylink","followRefer":"151","shareMethod":"TOKEN","sharePosition":"WATER_AID_INVITE_BUTTON","kpn":"NEBULA","subBiz":"OD_WATER_SHARE","shareId":"16784249724834","source":"PASSPHRASE_BACK","shareMode":"APP","originShareId":"16784249724834","enableWK":"1","layoutType":"4","shareObjectId":"'+shareObjectId+'","shareUrlOpened":"0","hyId":"orchard","timestamp":"'+Date.now()+'"}'
    }
     $.post(signurl, (error, response, data) => {
 		console.log(data);
