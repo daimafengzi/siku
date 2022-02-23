@@ -81,7 +81,7 @@ if (isGetCookie) {
 			  cookieVal = cookieArr[i];
 			  $.index = i + 1;
 			  console.log(`-------------------------\n\n开始【快手账号${$.index}】`)
-			if(i < 2){
+			if(i < 8){
 			//化肥助力body获取开始
 			  for (let ix = 0; ix < NBHFKS_SHARECODEArr.length; ix++) {
 				  if (NBHFKS_SHARECODEArr[ix]) {
@@ -93,7 +93,6 @@ if (isGetCookie) {
 				  }
 			  }
 			//化肥助力body获取结束
-			 //await officialSign();
 			}else{
 			//水滴助力body获取开始
 			  for (let ix = 0; ix < NBSDKS_SHARECODEArr.length; ix++) {
@@ -102,7 +101,7 @@ if (isGetCookie) {
 					 console.log(`-----------水滴助力码获取成功----------------`)
 					 console.log(NBSDKS_SHARECODEVal)
 					 console.log(`------------下面开始水滴助力---------------`)
-					 //await officialtaskCenter();
+					 await officialtaskCenter();
 				  }
 			  }
 			//水滴助力body获取结束
