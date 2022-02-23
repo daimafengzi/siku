@@ -81,13 +81,14 @@ if (isGetCookie) {
 			  cookieVal = cookieArr[i];
 			  $.index = i + 1;
 			  console.log(`-------------------------\n\n开始【快手账号${$.index}】`)
-			if(i < 8){
+			if(i < 2){
 			//化肥助力body获取开始
 			  for (let ix = 0; ix < NBHFKS_SHARECODEArr.length; ix++) {
 				  if (NBHFKS_SHARECODEArr[ix]) {
 					 NBHFKS_SHARECODEVal = NBHFKS_SHARECODEArr[ix]; 
 					 console.log(`-----------化肥助力码获取成功----------------`)
 					 console.log(NBHFKS_SHARECODEVal)
+					 console.log(`------------下面开始化肥助力---------------`)
 					 await officialSign();
 				  }
 			  }
@@ -99,8 +100,9 @@ if (isGetCookie) {
 				  if (NBSDKS_SHARECODEArr[ix]) {
 					 NBSDKS_SHARECODEVal = NBSDKS_SHARECODEArr[ix]; 
 					 console.log(`-----------水滴助力码获取成功----------------`)
-					 //console.log(NBSDKS_SHARECODEVal)
-					 await officialtaskCenter();
+					 console.log(NBSDKS_SHARECODEVal)
+					 console.log(`------------下面开始水滴助力---------------`)
+					 //await officialtaskCenter();
 				  }
 			  }
 			//水滴助力body获取结束
@@ -127,8 +129,9 @@ function  officialSign() {
         body: NBHFKS_SHARECODEVal
    }
     $.post(signurl, (error, response, data) => {
-		console.log(data);
 		//console.log("化肥助力");
+		data = JSON.parse(data);
+		console.log(data.data.popupEventList);
        resolve()
       })
    })
@@ -145,7 +148,8 @@ function  officialtaskCenter() {
         body: NBSDKS_SHARECODEVal
    }
     $.post(signurl, (error, response, data) => {
-		console.log(data);
+		data = JSON.parse(data);
+		console.log(data.data.popupEventList);
 		//console.log("水滴助力");
        resolve()
       })
