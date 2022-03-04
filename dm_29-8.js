@@ -7,7 +7,7 @@
 
 ================Loon==============
 [Script]
-cron "55 59 9,11,14,16,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=京东极速版抢券29减8优惠券
+cron "55 59 8,11,14,16,19 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_car_exchange.js, tag=京东极速版抢券29减8优惠券
 
  */
 const $ = new Env('京东极速版抢券29减8优惠券');
