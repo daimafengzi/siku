@@ -2,7 +2,7 @@
 京东极速版抢券5减2优惠券
 短期活动
 
-活动网页地址：https://u.jd.com/aK2gU7C
+活动网页地址：https://3.cn/-1s6Wbrt?_ts=1646388001525&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=CopyURL&ad_od=share
 
 ================Loon==============
 [Script]
