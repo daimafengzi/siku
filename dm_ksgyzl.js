@@ -46,7 +46,7 @@ if (isGetCookie) {
   }
 //循环获取助力码开始  共计循环5次
   
-for (var ix = 0;ix<5;ix++){
+for (var ix = 0;ix<4;ix++){
   //console.log(KS_SHARECODEs);
 	//依次获取单个助力码
 		var regex = /&/;
