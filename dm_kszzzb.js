@@ -5,7 +5,7 @@ cookie变量KS_COOKIE
 化肥助力码变量KS_SHARECODE
 水滴助力码变量KS_SHARECODE
 [Script]
-cron "2 0 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手周周赚金币
+cron "5 0 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手周周赚金币
 */
 const $ = new Env('快手周周赚金币')
 let cookieArr = [];
@@ -57,13 +57,13 @@ for (var ix = 0;ix<cookieArr.length;ix++){
 			  $.index = i + 1;
 			  console.log(`-------------------------\n\n开始助力【快手账号${$.index}】`)
 			  await two();
-			  console.log(`-------------------------\n\n【第${ix+1}次助力完成】`)
-			  console.log(`--------------------------------------------------`)
-			  console.log(`--------------------------------------------------`)
 			}
 		 }
 		 
 	//账号循环结束
+			console.log(`-------------------------\n\n【第${ix+1}次助力完成】`)
+			console.log(`--------------------------------------------------`)
+			console.log(`--------------------------------------------------`)
 }
 }
 //助力结束
