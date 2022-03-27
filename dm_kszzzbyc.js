@@ -5,11 +5,11 @@ cookie变量KS_COOKIE
 化肥助力码变量KS_SHARECODE
 水滴助力码变量KS_SHARECODE
 [Script]
-cron "5 0 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手周周赚金币yc
+cron "1 0 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手周周赚金币yc
 */
 const $ = new Env('快手周周赚金币yc')
 let cookieArr = [];
-let KS_SHARECODEArr = [],message, allMessage = '',assistanceId='', createUserId='',introductionUrl='',createNickName='',KS_CK='';
+let KS_SHARECODEArr = [],message, allMessage = '',assistanceId='', createUserId='',introductionUrl='',createNickName='',KS_CK='',KS_CKS='';
 
 if ($.isNode()) {
   if (process.env.KS_COOKIE && process.env.KS_COOKIE.indexOf('\n') > -1) {
@@ -43,20 +43,31 @@ if (isGetCookie) {
       console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}=============\n`)
 	  console.log(`============ 共计${zhanghao}个账号，将进行循环助力  =============\n`)
 	  await one();
+	  
   }
 //开始助力
-for (var ix = 0;ix<cookieArr.length;ix++){
-	if (cookieArr[ix]) {
-			  cookieValS = cookieArr[ix];
-			  console.log(`-------------------------\n\n【获取快手账号${ix+1}】助力码`)
-			  //await two();
+for (var ix = 0;ix< 8;ix++){
+			//拆分CK
+			var regex = /[\n]/;
+			var datals = KS_CKS.split(regex);
+			KS_CK = datals[ix];
+			console.log(`-------------------------\n\n【获取快手账号${ix+1}】助力码`)
+			//console.log(KS_CK);
+			if(KS_CK==""||KS_CK==null||KS_CK==undefined){
+				console.log("助力码获取失败。");
+			}else{
+				console.log("恭喜叼毛。助力码获取成功！");
+				await two();
+			}
+			//拆分CK结束
+			
 	//账号循环开始
 		  for (let i = 0; i < cookieArr.length; i++) {
 			if (cookieArr[i]) {
 			  cookieVal = cookieArr[i];
 			  $.index = i + 1;
 			  console.log(`-------------------------\n\n开始助力【快手账号${$.index}】`)
-			  //await three();
+			  await three();
 			}
 		 }
 		 
@@ -64,7 +75,6 @@ for (var ix = 0;ix<cookieArr.length;ix++){
 			console.log(`-------------------------\n\n【第${ix+1}次助力完成】`)
 			console.log(`--------------------------------------------------`)
 			console.log(`--------------------------------------------------`)
-}
 }
 //助力结束
 })().catch((e) => $.logErr(e))
@@ -80,11 +90,11 @@ function  one() {
    return new Promise((resolve, reject) => {
 	 let signurl = {
 		url: 'https://cdn.daimafengzi.com/ksck.json',
-	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	    headers: {'Content-Type': 'application/json;charset=utf-8'},
         }
     $.get(signurl, (error, response, data) => {
-		KS_CK=data
-		console.log(KS_CK);
+		KS_CKS=data
+		//console.log(KS_CKS);
        resolve()
       })
    })
@@ -97,12 +107,13 @@ function  two() {
    return new Promise((resolve, reject) => {
 	 let signurl = {
 		url: 'https://nebula.kuaishou.com/rest/zt/encourage/assistance/detail?assistanceMetaId=2',
-	    headers: {Cookie: cookieValS,'Content-Type': 'application/json;charset=utf-8'},
+	    headers: {Cookie: KS_CK.replace('\r', ''),'Content-Type': 'application/json;charset=utf-8'},
         }
     $.get(signurl, (error, response, data) => {
 		data = JSON.parse(data);
 		assistanceId = data.assistanceInfo.assistanceId;
 		console.log('assistanceId = '+assistanceId);
+		//console.log(data);
        resolve()
       })
    })
