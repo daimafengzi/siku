@@ -106,7 +106,8 @@ function  two() {
 	}
     $.post(signurl, (error, response, data) => {
 		data = JSON.parse(data);
-		console.log(data.msg);
+		//console.log(data.msg);
+	    	console.log(data);
        resolve()
       })
    })
