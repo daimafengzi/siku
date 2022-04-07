@@ -33,7 +33,7 @@ const logDebug = 0
 let notifyStr = ''
 let rndtime = "" //毫秒
 let httpResult //global buffer
-let host = 'i.snssdk.com'
+let host = 'api5-normal-lf.toutiaoapi.com'
 let hostname = 'https://' + host
 let userAgent = ($.isNode() ? process.env.jrttjsbUA : $.getdata('jrttjsbUA')) || 'Dalvik/2.1.0 (Linux; U; Android 7.1.2; VOG-AL10 Build/HUAWEIVOG-AL10) NewsArticle/8.2.8 tt-ok/3.10.0.2';
 let userAgentArr = []
@@ -238,7 +238,7 @@ async function ReadArticles() {
 async function ReadArtsReward() {
     let caller = printCaller()
     let rndGroupId = Math.floor(Math.random()*7000000000000000000)
-    let url = `${hostname}/luckycat/lite/v1/activity/done_whole_scene_task/?aid=35&update_version_code=85221&os_version=15.0&device_platform=iphone`
+    let url = `${hostname}/luckycat/lite/v1/activity/done_whole_scene_task/?session_id=53AFE1EC-91E8-4814-8444-43B9A2AB8C85&version_code=8.7.5&tma_jssdk_version=2.25.0.20&app_name=news_article_lite&device_id=3914723132975255&channel=App%20Store&resolution=1125*2436&aid=35&ab_version=668908%2C3937402%2C668905%2C3937366%2C668904%2C3937345%2C668906%2C3937374%2C668903%2C3937392%2C668907%2C3858189%2C3937398%2C1859936%2C3801463%2C3520490%2C3596061%2C3700363%2C3958946&ab_feature=794528&review_flag=0&ab_group=794528&subchannel=unknown&update_version_code=87520&os_version=15.3.1&ssmix=a&device_platform=iphone&iid=4156587495396573&ab_client=a1%2Cf2%2Cf7%2Ce1&device_type=iPhone%20X`
     let body = `{"is_golden_egg":false,"scene_key":"article_detail","group_id":"${rndGroupId}"}`
     let urlObject = populatePostUrl(url,body)
     await httpPost(urlObject,caller)
@@ -424,7 +424,7 @@ async function OpenTreasureBox() {
 async function ExcitationAd(task_id) {
     let caller = printCaller()
     let timeInMS = Math.round(new Date().getTime())
-    let url = `${hostname}/luckycat/lite/v1/task/done/excitation_ad?os_api=25&device_type=VOG-AL10&ssmix=a&manifest_version_code=8280&dpi=240&abflag=3&pass_through=default&cookie_data=JS9ij2PS3AwsrLXtsMlBmg&act_hash=33e5c7c6eceed48faa09bcb731f9cbfe&rom_version=25&app_name=news_article_lite&ab_client=a1%2Ce1%2Cf2%2Cg2%2Cf7&version_name=8.2.8&ab_version=1859936%2C668908%2C3491714%2C668907%2C3491710%2C668905%2C3491678%2C668906%2C3491686%2C668904%2C3491669%2C668903%2C3491704%2C3269751%2C3472846%2C3493942&plugin_state=7731332411413&sa_enable=0&ac=wifi&_request_from=web&update_version_code=82809&channel=lite2_tengxun&_rticket=${timeInMS}&status_bar_height=24&cookie_base=-1E_P8je5Sub5zWkBKiqODt2MECOGuxlsxp2J8N2wuHiAln1gxRIlq9T45zO7j1Y4RwJPfwnZaGcZ871TDjPVA&dq_param=0&device_platform=android&iid=1592553870724568&scm_build_version=1.0.0.1454&mac_address=88%3AB1%3A11%3A61%3A96%3A7B&version_code=828&polaris_version=1.0.5&tma_jssdk_version=1.95.0.28&cdid=19f86713-d4cf-49ea-81ab-541aa5cd7b44&is_pad=1&openudid=711ca30d9d3c10b7&device_id=809664500489800&resolution=720*1280&act_token=0WoqgcXrIdM-iXg179hjJOCBPav6mHf3Biw-ElFmYqvWQIsvoERPbrbEItIYJDJkjXW4NPai8DqYMlLQypO_eQ&os_version=7.1.2&language=zh&device_brand=HUAWEI&aid=35&ab_feature=z1&luckycat_version_name=4.2.0-rc.5&luckycat_version_code=420005`
+    let url = `${hostname}/luckycat/lite/v1/task/done/excitation_ad?session_id=DA1C440A-4BCB-455B-B5AC-AF6BCCA9CD34&version_code=8.7.5&tma_jssdk_version=2.25.0.20&app_name=news_article_lite&device_id=3914723132975255&channel=App%20Store&resolution=1125*2436&aid=35&ab_version=668908,3937402,668905,3937366,668904,3937345,668906,3937374,668903,3937392,668907,3858189,3937398,1859936,3801463,3520490,3596061,3700363,3958946&ab_feature=794528&review_flag=0&ab_group=794528&subchannel=unknown&update_version_code=87520&cdid=8558BD2A-1D63-43FC-9AF4-632B86BC9D66&ac=WIFI&os_version=15.3.1&ssmix=a&device_platform=iphone&iid=4156587495396573&ab_client=a1,f2,f7,e1&device_type=iPhone%20X`
     let body = `{"ad_alias_position":"coin","task_key":"excitation_ad", "task_id" : "${task_id}"}`
     let urlObject = populatePostUrl(url,body)
     await httpPost(urlObject,caller)
