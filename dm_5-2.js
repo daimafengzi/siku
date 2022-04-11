@@ -77,7 +77,7 @@ function exchange() {
           console.log(data);
           if (safeGet(data)) {
             data = JSON.parse(data);
-            console.log(`【9.9特卖9减3优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}\n`);
+            console.log(`【京东极速版5减2优惠券抢券结果】${JSON.stringify(data.subCodeMsg)}\n`);
 			//自行添加通知项目开始
 			var str="{"+data.subCodeMsg+"}";
 			if(str.indexOf('领取成功') !=-1){
