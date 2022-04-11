@@ -7,8 +7,9 @@ URL变量：BGK_URL
 cron "2 9 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=不挂科签到
 */
 const $ = new Env('不挂科签到')
+const jsname = '不挂科签到'
 let cookieArr = [],URLArr = [];
-let signCuid = [], notifyStr = "";
+let notifyStr = "";
 const notify = $.isNode() ? require('./sendNotify') : '';
 const notifyFlag = 1; //0为关闭通知，1为打开通知,默认为1
 if ($.isNode()) {
@@ -106,7 +107,7 @@ function  one() {
 //通知
 async function showmsg() {
     
-    notifyBody = "不挂科运行通知\n\n" + notifyStr
+    notifyBody = jsname + "运行通知\n\n" + notifyStr
     
     if (notifyFlag != 1) {
         console.log(notifyBody);
