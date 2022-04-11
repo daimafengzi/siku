@@ -95,8 +95,8 @@ function  one() {
 		}
     $.get(signurl, (error, response, data) => {
 		data = JSON.parse(data);
-		console.log(data.data.signResult);
-		notifyStr += `【不挂科账号${$.index}签到结果】${JSON.stringify(data.data.signResult)}\n`
+		console.log(`【不挂科账号${$.index}签到结果:】${JSON.stringify(data.data.signResult)}\n`);
+		notifyStr += `不挂科账号${$.index}签到结果:】${JSON.stringify(data.data.signResult)}\n`
        resolve()
       })
    })
