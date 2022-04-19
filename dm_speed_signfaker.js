@@ -687,7 +687,7 @@ function invite2() {
     }
   }
   $.post(options, (err, resp, data) => {
-    // console.log(data)
+     console.log("invite2:   "+data)
   })
 }
 
@@ -714,7 +714,7 @@ function invite() {
     }
   }
   $.post(options, (err, resp, data) => {
-    // console.log(data)
+     //console.log("invite:   "+data)
   })
 }
 
