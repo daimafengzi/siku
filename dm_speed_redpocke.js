@@ -79,7 +79,7 @@ if ($.isNode()) {
 
 async function jsRedPacket() {
   try {
-    await invite();//天天领红包邀请用户
+    //await invite();//邀请好友加速签到得现金
     await sign();//极速版签到
     await reward_query();//邀请好友签到得现金
      for (let i = 0; i < 3; ++i) {
