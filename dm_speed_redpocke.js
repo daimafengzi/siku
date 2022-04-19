@@ -79,15 +79,15 @@ if ($.isNode()) {
 
 async function jsRedPacket() {
   try {
-    await invite2();//天天领红包邀请用户
-    //await sign();//极速版签到
-    //await reward_query();//邀请好友签到得现金
-    // for (let i = 0; i < 3; ++i) {
-    //   await redPacket();//开红包,使用邀请链接
-    //   await $.wait(2000)
-    // }
-    //await getPacketList();//天天领红包提现
-    //await signPrizeDetailList();//极速版提现
+    //await invite2();//天天领红包邀请用户
+    await sign();//极速版签到
+    await reward_query();//邀请好友签到得现金
+     for (let i = 0; i < 3; ++i) {
+       await redPacket();//开红包,使用邀请链接
+       await $.wait(2000)
+     }
+    await getPacketList();//天天领红包提现
+    await signPrizeDetailList();//极速版提现
      
     await showMsg()
   } catch (e) {
