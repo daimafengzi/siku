@@ -10,17 +10,17 @@
 ============Quantumultx===============
 [task_local]
 #京东极速版红包
-20 0,22 * * * jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+20 0,12,22 * * * jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 ================Loon==============
 [Script]
-cron "20 0,22 * * *" script-path=jd_speed_redpocke.js,tag=京东极速版红包
+cron "20 0,12,22 * * *" script-path=jd_speed_redpocke.js,tag=京东极速版红包
 
 ===============Surge=================
-京东极速版红包 = type=cron,cronexp="20 0,22 * * *",wake-system=1,timeout=3600,script-path=jd_speed_redpocke.js
+京东极速版红包 = type=cron,cronexp="20 0,12,22 * * *",wake-system=1,timeout=3600,script-path=jd_speed_redpocke.js
 
 ============小火箭=========
-京东极速版红包 = type=cron,script-path=jd_speed_redpocke.js, cronexpr="20 0,22 * * *", timeout=3600, enable=true
+京东极速版红包 = type=cron,script-path=jd_speed_redpocke.js, cronexpr="20 0,12,22 * * *", timeout=3600, enable=true
 */
 const $ = new Env('京东极速版红包');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -80,7 +80,7 @@ if ($.isNode()) {
 async function jsRedPacket() {
   try {
     //await invite();//邀请好友加速签到得现金
-    await sign();//极速版签到
+	await sign();//极速版签到
     await reward_query();//邀请好友签到得现金
      for (let i = 0; i < 3; ++i) {
        await redPacket();//开红包,使用邀请链接
@@ -88,12 +88,14 @@ async function jsRedPacket() {
      }
     await getPacketList();//天天领红包提现
     await signPrizeDetailList();//极速版提现
-     
     await showMsg()
   } catch (e) {
     $.logErr(e)
   }
 }
+
+
+
 
 function showMsg() {
   return new Promise(resolve => {
@@ -104,12 +106,11 @@ function showMsg() {
 async function sign() {
   return new Promise(resolve => {
     const body = ''
-	
 	//console.log(body);
     const options = {
       url: `https://api.m.jd.com`,
 	  //更改了以下链接
-      body: `functionId=apSignIn_day&body={"linkId":"9WA12jYGulArzWS7vcrwhw","serviceName":"dayDaySignGetRedEnvelopeSignService","business":1}&t=1650385471039&appid=activities_platform&client=H5&clientVersion=1.0.0&h5st=20220420002431043%3B2047678199383580%3B15097%3Btk02w9c6c1c3218nG7E1p82u7opP26Vl1wxjuzPGNO5LuqLTaUtcakfHlkHsD3W18lCKJf4FzwjJlXtjYrS7A1JNZHvi%3Be103fffde41ea900b67b4e07f6e8612b4031e649bb14dd1aa23123ac5869e369%3B3.0%3B1650385471043`,
+      body: 'functionId=apSignIn_day&body={"linkId":"9WA12jYGulArzWS7vcrwhw","serviceName":"dayDaySignGetRedEnvelopeSignService","business":1}&t=1650562676276&appid=activities_platform&client=H5&clientVersion=1.0.0&h5st=20220422013756282%3B1949473501028685%3B15097%3Btk02wa7461bed18nF4kPFaCjLujLsFT46sPWzINbeEk9DSoxMs91cEzsStkOASBtEIhAKUaHMXcYGw5wucMO%2FuFG8BQH%3Bf69e1d297faf49a85cd8b5157c2fd571b177d0105df68a19dd7613cce61524d7%3B3.0%3B1650562676282',
 	  //更改结束
 	  headers: {
         'Cookie': cookie,
@@ -133,12 +134,12 @@ async function sign() {
         } else {
           if (safeGet(data)) {
             data = $.toObj(data);
-			///console.log(data);
+			console.log(data);
             if (data.code === 0) {
               if (data.data.retCode === 0) {
                 message += `极速版签到提现：签到成功\n`;
 				console.log(`极速版签到提现：签到成功\n`);
-                //console.log(data.data.historySignInAnCycle);
+                //console.log(options);
               } else {
                 console.log(`极速版签到提现：签到失败:${data.data.retMessage}\n`);
               }
@@ -244,7 +245,7 @@ function reward_query() {
 async function redPacket() {
   return new Promise(resolve => {
 	 //更改了以下链接天天领红包邀请
-    $.get(taskGetUrl("spring_reward_receive",{"inviter":["BW3p0C1NZyK8r8gj2mHM5-T4VXlfs94ePMi4vNCT4RU"][Math.floor((Math.random() * 1))], linkId}),
+    $.get(taskGetUrl("spring_reward_receive",{"inviter":["Eu7-E0CUzqYyhZJo9d3YkQ"][Math.floor((Math.random() * 1))], linkId}),
     //更改结束
     async (err, resp, data) => {
           try {
@@ -254,6 +255,7 @@ async function redPacket() {
             } else {
               if (safeGet(data)) {
                 data = JSON.parse(data);
+				console.log(data)
                 if (data.code === 0) {
                   if (data.data.received.prizeType !== 1) {
                     message += `获得${data.data.received.prizeDesc}\n`

@@ -14,13 +14,13 @@
 
 ================Loon==============
 [Script]
-cron "21 3,8 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js,tag=京东极速版
+cron "11 3,8,13,18,23 * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js,tag=京东极速版
 
 ===============Surge=================
-京东极速版 = type=cron,cronexp="21 3,8 * * *",wake-system=1,timeout=33600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js
+京东极速版 = type=cron,cronexp="11 3,8,13,18,23 * * *",wake-system=1,timeout=33600,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js
 
 ============小火箭=========
-京东极速版 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js, cronexpr="21 3,8 * * *", timeout=33600, enable=true
+京东极速版 = type=cron,script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_speed_sign.js, cronexpr="11 3,8,13,18,23 * * *", timeout=33600, enable=true
 */
 const $ = new Env('京东极速版');
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -110,7 +110,7 @@ async function signInit() {
     $.get(taskUrl('speedSignInit', {
       "activityId": "8a8fabf3cccb417f8e691b6774938bc2",
       "kernelPlatform": "RN",
-      "inviterId":"PkvqAfMTF/M6nsvHTxm7iCp4BuRo4J0svFR+Bcs/yCs="
+      "inviterId":"a+48qsYlhqlg0OTjJybQCgv0nwBzANKgJ8++ueL5OOY="
     }), async (err, resp, data) => {
       try {
         if (err) {
@@ -667,8 +667,8 @@ function taskGetUrl(function_id, body) {
 
 function invite2() {
   let inviterIdArr = [
-    "PkvqAfMTF/M6nsvHTxm7iCp4BuRo4J0svFR+Bcs/yCs=",
 	"a+48qsYlhqlg0OTjJybQCgv0nwBzANKgJ8++ueL5OOY=",
+	"PkvqAfMTF/M6nsvHTxm7iCp4BuRo4J0svFR+Bcs/yCs=",
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
@@ -694,8 +694,8 @@ function invite2() {
 function invite() {
   let t = +new Date()
   let inviterIdArr = [
-    "PkvqAfMTF/M6nsvHTxm7iCp4BuRo4J0svFR+Bcs/yCs=",
 	"a+48qsYlhqlg0OTjJybQCgv0nwBzANKgJ8++ueL5OOY=",
+	"PkvqAfMTF/M6nsvHTxm7iCp4BuRo4J0svFR+Bcs/yCs=",
   ]
   let inviterId = inviterIdArr[Math.floor((Math.random() * inviterIdArr.length))]
   let options = {
