@@ -1,7 +1,7 @@
 /*
 快手周周赚金币
 循环助力
-cookie变量KS_COOKIE
+ksjsbCookie
 化肥助力码变量KS_SHARECODE
 水滴助力码变量KS_SHARECODE
 [Script]
@@ -12,14 +12,14 @@ let cookieArr = [];
 let KS_SHARECODEArr = [],message, allMessage = '',assistanceId='', createUserId='',introductionUrl='',createNickName='';
 
 if ($.isNode()) {
-  if (process.env.KS_COOKIE && process.env.KS_COOKIE.indexOf('\n') > -1) {
-      KS_COOKIEs = process.env.KS_COOKIE.split('\n');
+  if (process.env.ksjsbCookie && process.env.ksjsbCookie.indexOf('\n') > -1) {
+      ksjsbCookies = process.env.ksjsbCookie.split('\n');
   } else {
-      KS_COOKIEs = process.env.KS_COOKIE.split()
+      ksjsbCookies = process.env.ksjsbCookie.split()
   };
-  Object.keys(KS_COOKIEs).forEach((item) => {
-        if (KS_COOKIEs[item]) {
-          cookieArr.push(KS_COOKIEs[item])
+  Object.keys(ksjsbCookies).forEach((item) => {
+        if (ksjsbCookies[item]) {
+          cookieArr.push(ksjsbCookies[item])
         }
       })
 } else {
