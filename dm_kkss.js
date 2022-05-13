@@ -83,8 +83,8 @@ async function start() {
 	await sign_info();
 	await $.wait(2 * 1000);
 
-	console.log("开始 宝箱信息");
-	//await box_info();
+	console.log("开始 分享获得3000金币信息");
+	await setShare();
 	await $.wait(2 * 1000);
 
 
@@ -92,9 +92,6 @@ async function start() {
 
 
 }
-
-
-
 
 /**
  * 用户信息    httpGet
@@ -124,9 +121,6 @@ async function user_info() {
 		throw new Error(`'喂  喂 ---  用户信息 失败 ❌ 了呢 ,别睡了, 起来更新了喂!`);
 	}
 }
-
-
-
 
 
 /**
@@ -159,12 +153,6 @@ async function sign_info() {
 
 
 
-
-
-
-
-
-
 /**
  * 签到    httpGet
  * https://nebula.kuaishou.com/rest/n/nebula/sign/sign?source=activity
@@ -193,11 +181,58 @@ async function signin() {
 
 
 /**
+ * 分享获得3000金币    httpGet
+ * https://nebula.kuaishou.com/rest/n/nebula/account/withdraw/setShare
+ */
+async function setShare() {
+    let url = {
+	  url:`https://nebula.kuaishou.com/rest/n/nebula/account/withdraw/setShare`,
+	  headers: {
+			'Cookie': ck[0],
+		},
+	};  
+	let result = await httpGet(url, `分享获得3000金币`);
+	if (result.result == 1) {
+		console.log(`${usre_name}=>准备分享得金币`);
+		await $.wait(200);
+		await taskReward(122);
+	} else{
+	console.log(`${usre_name}=>分享失败：${result.error_msg}`);
+	}
+  }
+//做任务
+/**
+ * 做任务    httpGet
+ * https://nebula.kuaishou.com/rest/n/nebula/daily/report?taskId=${taskId}
+ */
+async function taskReward(taskId) {
+	let url = {
+	  url:`https://nebula.kuaishou.com/rest/n/nebula/daily/report?taskId=${taskId}`,
+	  headers: {
+			'Cookie': ck[0],
+		},
+	};  
+	let result = await httpGet(url, `做任务`);
+	if (result.result == 1) {
+		console.log(`🎈${usre_name}=>完成任务[${taskId}]成功，获得${result.data.amount}金币`)
+	} else{
+	console.log(`🎈${usre_name}=>完成任务[${taskId}]失败：${result.error_msg}`)
+	}
+	
+	
+	
+}	
+
+
+
+
+
+/**
  * 宝箱信息    httpGet
  * 
  * https://nebula.kuaishou.com/rest/n/nebula/box/explore?isOpen=false&isReadyOfAdPlay=true
  */
-async function box_info() {
+/**async function box_info() {
 	let url = {
 		url: `https://nebula.kuaishou.com/rest/n/nebula/box/explore?isOpen=false&isReadyOfAdPlay=true`,
 		headers: {
@@ -214,7 +249,7 @@ async function box_info() {
 			console.log(`\n 宝箱信息:  ${usre_name} 可以宝箱信息,去 开宝箱 喽! \n`);
 			msg += `\n 宝箱信息:  ${usre_name} 可以宝箱信息,去 开宝箱 喽! \n`;
 			await $.wait(3 * 1000);
-			await open_box();
+			//await open_box();
 		}
 
 	} else if (result.result == 10901) {
@@ -224,7 +259,7 @@ async function box_info() {
 		console.log(`\n 宝箱信息: 失败 ❌ 了呢,原因未知！  ${result} \n`);
 		msg += `\n 宝箱信息: 失败 ❌ 了呢,原因未知！  ${JSON.parse(result)} \n `;
 	}
-}
+}**/
 
 
 
@@ -234,7 +269,7 @@ async function box_info() {
  * 开宝箱    httpGet
  * https://nebula.kuaishou.com/rest/n/nebula/box/explore?isOpen=true&isReadyOfAdPlay=true
  */
-async function open_box() {
+/**async function open_box() {
 	let url = {
 		url: `https://nebula.kuaishou.com/rest/n/nebula/box/explore?isOpen=true&isReadyOfAdPlay=true`,
 		headers: {
@@ -251,8 +286,7 @@ async function open_box() {
 		console.log(`\n 开宝箱: 失败 ❌ 了呢,原因未知！  ${result} \n`);
 		msg += `\n 开宝箱: 失败 ❌ 了呢,原因未知！  ${JSON.parse(result)} \n `;
 	}
-}
-
+}**/
 
 
 
