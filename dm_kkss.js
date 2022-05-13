@@ -84,7 +84,7 @@ async function start() {
 	await $.wait(2 * 1000);
 
 	console.log("开始 宝箱信息");
-	await box_info();
+	//await box_info();
 	await $.wait(2 * 1000);
 
 
@@ -214,7 +214,7 @@ async function box_info() {
 			console.log(`\n 宝箱信息:  ${usre_name} 可以宝箱信息,去 开宝箱 喽! \n`);
 			msg += `\n 宝箱信息:  ${usre_name} 可以宝箱信息,去 开宝箱 喽! \n`;
 			await $.wait(3 * 1000);
-			//await open_box();
+			await open_box();
 		}
 
 	} else if (result.result == 10901) {
