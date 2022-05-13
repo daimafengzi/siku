@@ -4,7 +4,7 @@
  * 
  * 快手极速版  请使用完整版ck
  * 
- * cron 0-59/30 6-20 * * *  yml2213_javascript_master/ksjsb.js
+ * cron 10 * * * *  yml2213_javascript_master/ksjsb.js
  * 
  * 5-13	完成签到,宝箱信息功能 --脚本开源,欢迎 pr
  * 5-13	增加箱提示,增加分享任务
@@ -90,9 +90,12 @@ async function start() {
 
 
 
-	console.log("开始 分享");
-	await do_Share();
-	await $.wait(2 * 1000);
+	if (local_hours() == 14) {
+		console.log("开始 分享");
+		await do_Share();
+		await $.wait(2 * 1000);
+	}
+	local_hours()
 
 
 
