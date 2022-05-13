@@ -90,7 +90,7 @@ async function start() {
 
 
 
-	if (local_hours() == 14) {
+	if (local_hours() == 0) {
 		console.log("开始 分享");
 		await do_Share();
 		await $.wait(2 * 1000);
