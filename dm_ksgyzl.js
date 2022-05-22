@@ -25,6 +25,27 @@ if ($.isNode()) {
    $.getjson('cookies_ks', []).forEach(cookie => cookieArr.push(cookie));
 }
 
+//获取助力码
+if ($.isNode()) {
+  if (process.env.KS_SHARECODE && process.env.KS_SHARECODE.indexOf('&') > -1) {
+      KS_SHARECODEs = process.env.KS_SHARECODE.split('&');
+  } else {
+      KS_SHARECODEs = process.env.KS_SHARECODE.split()
+  };
+  Object.keys(KS_SHARECODEs).forEach((item) => {
+        if (KS_SHARECODEs[item]) {
+          KS_SHARECODEArr.push(KS_SHARECODEs[item])
+        }
+      })
+} else {
+   KS_SHARECODEArr.push($.getdata('KS_SHARECODE'));
+   $.getjson('KS_SHARECODE', []).forEach(sharecode => KS_SHARECODEArr.push(sharecode));
+}
+//获取助力码结束
+
+
+
+
 let isGetCookie = typeof $request !== 'undefined'
 if (isGetCookie) {
    GetCookie();
@@ -40,41 +61,47 @@ if (isGetCookie) {
 	  zhanghao = cookieArr.length
       console.log(`============ 脚本执行-北京时间(UTC+8)：${new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toLocaleString()}=============\n`)
 	  console.log(`============ 共计${zhanghao}个账号，将进行循环助力  =============\n`)
-	  await one();
   }
-//循环获取助力码开始  共计循环5次
+
   
-for (var ix = 0;ix< cookieArr.length;ix++){
-  //console.log(KS_SHARECODEs);
-	//依次获取单个助力码
-		var regex = /&/;
-		var datals = KS_SHARECODEs.split(regex);
-		zhulima = datals[ix];
-		//拆分助力码
-			var regex = /@/;
-			var datals = zhulima.split(regex);
-			fid = datals[0];
-			shareObjectId = datals[1];
-			console.log('FID = '+fid);
-			console.log('ShareObjectId = '+shareObjectId);
-		 //拆分助力码结束
-		await two();
-	//依次获取单个助力码结束
-	//账号循环开始
-		  for (let i = 0; i < cookieArr.length; i++) {
-			if (cookieArr[i]) {
-			  cookieVal = cookieArr[i];
-			  $.index = i + 1;
-			  console.log(`-------------------------\n\n开始【快手账号${$.index}】`)
-			await officialSignhf();
-			await huoquhuafei();
+  
+
+			//化肥助力body获取开始
+			  for (let ix = 0; ix < KS_SHARECODEArr.length; ix++) {
+				  if (KS_SHARECODEArr[ix]) {
+					 KS_SHARECODEVal = KS_SHARECODEArr[ix]; 
+					 $.indexs = ix + 1;
+					 console.log(`-----------化肥助力码获取成功----------------`)
+					 console.log('助力码：'+KS_SHARECODEVal)
+					//拆分一个助力码
+						var regex = /\s+|,|@|#/;
+						var datals = KS_SHARECODEVal.split(regex);
+						fid = datals[0]
+						shareObjectId = datals[1]
+						console.log('fid：'+datals[0]);
+						console.log('shareObjectId：'+datals[1]);
+						await two();
+					//拆分一个助力码结束
+					 console.log(`------第${$.indexs}个账号开始化肥助力-------`)
+					 //账号循环开始
+			  for (let i = 0; i < cookieArr.length; i++) {
+					if (cookieArr[i]) {
+					  cookieVal = cookieArr[i];
+					  $.index = i + 1;
+					  console.log(`--------\n\n开始【快手账号${$.index}】`)
+					  await officialSignhf();
+					}
+					 
+				  }
+			  }
+			//化肥助力body获取结束
 			}
-		 }
-		console.log(`-------------------------\n\n【第${ix+1}次助力完成】`)
-	//账号循环结束
-  
-}
-//循环获取助力码结束
+		   
+
+		//账号循环结束
+		
+
+
 })().catch((e) => $.logErr(e))
     .finally(() => {
       $.name = $.oldName;
@@ -83,21 +110,7 @@ for (var ix = 0;ix< cookieArr.length;ix++){
 }
 /////代码结束
 
-//获取助力码
-function  one() {
-   return new Promise((resolve, reject) => {
-	 let signurl = {
-		url: 'https://cdn.daimafengzi.com/ks.json',
-	    headers: {Cookie: 'region_ticket=RT_810B87D966AAB4C52163635D8D0EB73B04B9F550CA01247DD65255D890947AE71CE082C83','Content-Type': 'application/x-www-form-urlencoded'},
-        }
-    $.get(signurl, (error, response, data) => {
-		KS_SHARECODEs=data
-		//console.log(KS_SHARECODEs);
-       resolve()
-      })
-   })
- }
-//获取助力码结束
+
 
 
 //获取分享ID
