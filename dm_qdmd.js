@@ -149,9 +149,9 @@ async function jstoken() {
 function showMsg() {
   return new Promise(resolve => {
     if (message) {
-      allMessage += `【京东账号】${$.nickName || $.UserName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : '\n\n'}`;
+      allMessage += `【京东账号${$.index}】${$.nickName || $.UserName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : '\n\n'}`;
     }
-    $.msg($.name, '', `【京东账号】${$.nickName}\n${message}`);
+    $.msg($.name, '', `【京东账号${$.index}】${$.nickName || $.UserName}\n${message}`);
     resolve()
   })
 }
