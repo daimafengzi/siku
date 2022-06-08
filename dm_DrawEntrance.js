@@ -4,7 +4,7 @@
 脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
 ============Quantumultx===============
 [task_local]
-15 6 * * * jd_DrawEntrance.js, tag=天天优惠大乐透,  enabled=true
+15 6,12,16 * * * jd_DrawEntrance.js, tag=天天优惠大乐透,  enabled=true
 ================Loon==============
 [Script]
 cron "15 6 * * *" script-path=jd_DrawEntrance.js,tag=天天优惠大乐透
