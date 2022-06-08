@@ -7,11 +7,11 @@
 15 6,12,16 * * * jd_DrawEntrance.js, tag=天天优惠大乐透,  enabled=true
 ================Loon==============
 [Script]
-cron "15 6 * * *" script-path=jd_DrawEntrance.js,tag=天天优惠大乐透
+cron "15 6,12,16 * * *" script-path=jd_DrawEntrance.js,tag=天天优惠大乐透
 ===============Surge=================
-天天优惠大乐透 = type=cron,cronexp="15 6 * * *",wake-system=1,timeout=3600,script-path=jd_DrawEntrance.js
+天天优惠大乐透 = type=cron,cronexp="15 6,12,16 * * *",wake-system=1,timeout=3600,script-path=jd_DrawEntrance.js
 ============小火箭=========
-天天优惠大乐透 = type=cron,script-path=jd_DrawEntrance.js, cronexpr="15 6 * * *", timeout=3600, enable=true
+天天优惠大乐透 = type=cron,script-path=jd_DrawEntrance.js, cronexpr="15 6,12,16 * * *", timeout=3600, enable=true
  */
 const $ = new Env('天天优惠大乐透');
 const notify = $.isNode() ? require('./sendNotify') : '';
