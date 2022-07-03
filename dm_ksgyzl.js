@@ -1,7 +1,7 @@
 /*
 快手果园助力内部版
 循环助力
-cookie变量ksjsb_data
+cookie变量ksjsbCookie
 [Script]
 cron "5 0,8,15 * * *" script-path=https://github.com/daimafengzi/siku.git, tag=快手果园助力内部版
 */
@@ -10,14 +10,14 @@ let cookieArr = [];
 let KS_SHARECODEArr = [],message, allMessage = '',shareId='', zhulima='',KS_SHARECODEs='',fid='',shareObjectId='';
 
 if ($.isNode()) {
-  if (process.env.ksjsb_data && process.env.ksjsb_data.indexOf('\n') > -1) {
-      ksjsb_datas = process.env.ksjsb_data.split('\n');
+  if (process.env.ksjsbCookie && process.env.ksjsbCookie.indexOf('\n') > -1) {
+      ksjsbCookies = process.env.ksjsbCookie.split('\n');
   } else {
-      ksjsb_datas = process.env.ksjsb_data.split()
+      ksjsbCookies = process.env.ksjsbCookie.split()
   };
-  Object.keys(ksjsb_datas).forEach((item) => {
-        if (ksjsb_datas[item]) {
-          cookieArr.push(ksjsb_datas[item])
+  Object.keys(ksjsbCookies).forEach((item) => {
+        if (ksjsbCookies[item]) {
+          cookieArr.push(ksjsbCookies[item])
         }
       })
 } else {
