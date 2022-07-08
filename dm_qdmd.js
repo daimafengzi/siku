@@ -151,7 +151,7 @@ function showMsg() {
     if (message) {
       allMessage += `【京东账号${$.index}】${$.nickName || $.UserName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : '\n\n'}`;
     }
-    $.msg($.name, '', `【京东账号${$.index}】${$.nickName || $.UserName}\n${message}`);
+    $.msg($.name, '', `【京东账号${$.index}】${$.nickName}\n${message}`);
     resolve()
   })
 }
