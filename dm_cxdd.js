@@ -110,7 +110,7 @@ async function jstoken() {
 			console.log("商品ID："+orderId);
 			console.log("快递名称："+operator);
 			console.log("快递详情："+jdmessage);
-			console.log("商品名称详情："+wareInfoList+`\n\n`);
+			//console.log("商品名称详情："+wareInfoList+`\n\n`);
 			message += `商品ID：${orderId} \n 商品名称：${wname}\n 快递名称：${operator}\n 快递详情：${jdmessage} \n\n`
 			}
             if (data['retcode'] === 1001) {
