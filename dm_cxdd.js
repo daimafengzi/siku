@@ -3,7 +3,7 @@
 活动地址：https://signfree.jd.com/?activityId=PiuLvM8vamONsWzC0wqBGQ&lng=116.451748&lat=25.667077&sid=538d4cff455fbcd0a48217f9612cca1w&un_area=16_1362_1365_45002&utm_source=iosapp&utm_medium=liteshare&utm_campaign=t_335139774&utm_term=Qqfriends&ad_od=share&utm_user=plusmember
 ================Loon==============
 [Script]
-cron "3 0 8 1 * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=查询订单信息
+cron "30 12 * * * *" script-path=https://raw.githubusercontent.com/Aaron-lv/sync/jd_scripts/jd_price.js,tag=查询订单信息
 
  */
 const $ = new Env('查询订单信息');
@@ -11,6 +11,7 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 //IOS等用户直接用NobyDa的jd cookie
+let cishu= 0;//定义签到次数
 let cookiesArr = [], cookie = '', message, allMessage = '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
@@ -33,6 +34,7 @@ const JD_API_HOST = 'https://api.m.jd.com/';
       $.index = i + 1;
       $.isLogin = true;
       $.nickName = '';
+	  cishu = 0;
       message = '';
       await TotalBean();
       console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
@@ -75,11 +77,10 @@ async function jstoken() {
 				"Accept-Language": "zh-cn",
 				"Connection": "keep-alive",
 				"Cookie": cookie,
-				"Origin": "https://mbt.jd.com",
-				"Referer": "https://mbt.jd.com/bill/monthlybill/rn/index.html?page=page_bill_page&monthlyBillType=0&channelcode=007&lng=117.020205&lat=25.074926&sid=8b8da54a6cbbdd9ba8c7449161d2c4dw&un_area=16_1362_1365_45002",
+				"Host": "api.m.jd.com",
 				"User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
 			},
-    body: "reqData=%7B%22monthlyBillType%22%3A%220%22%2C%22billId%22%3A%22%22%2C%22billDateTime%22%3A%22%22%2C%22clientType%22%3A%22mpage%22%2C%22clientVersion%22%3A%227.1.2%22%7D"
+    body: "body=%7B%22newUiSwitch%22%3A%221%22%2C%22deis%22%3A%22dy%22%2C%22dateTimeIndex%22%3A%22%22%2C%22pass%22%3A%22%22%2C%22pagesize%22%3A%2210%22%2C%22page%22%3A%221%22%7D&build=168143&client=apple&clientVersion=11.1.0&d_brand=apple&d_model=iPhone9%2C2&ef=1&eid=eidI0a9e812355sfGy1UO6CGTbCi0KmfJ5qBZRstVblj6ws3Vwc0goY3TR%2BtL5nmZZuqpTlGvhqLjO%2BINEWYHUvnrRyzFTHgBRu%2BKvCdLk/hcEDrofpC&ep=%7B%22ciphertype%22%3A5%2C%22cipher%22%3A%7B%22screen%22%3A%22CJS0CseyCtK4%22%2C%22wifiBssid%22%3A%22DJc5DtVvYwU5DNrwEJHtY2PvCJc4ZWYyENVsC2OzDWC%3D%22%2C%22osVersion%22%3A%22CJUkDG%3D%3D%22%2C%22area%22%3A%22CJZpCJC2Cv8nCzY1XzG1CNKy%22%2C%22openudid%22%3A%22DJrtZwU1EQS2ZNU5YWU1EQUzCzC2CWDsCzVsCJU5ZNCyEJKyZwTuYm%3D%3D%22%2C%22uuid%22%3A%22aQf1ZRdxb2r4ovZ1EJZhcxYlVNZSZz09%22%7D%2C%22ts%22%3A1657292337%2C%22hdid%22%3A%22JM9F1ywUPwflvMIpYPok0tt5k9kW4ArJEU3lfLhxBqw%3D%22%2C%22version%22%3A%221.0.3%22%2C%22appname%22%3A%22com.360buy.jdmobile%22%2C%22ridx%22%3A-1%7D&ext=%7B%22prstate%22%3A%220%22%2C%22pvcStu%22%3A%221%22%7D&isBackground=N&joycious=82&lang=zh_CN&networkType=wifi&networklibtype=JDNetworkBaseAF&partner=apple&rfs=0000&scope=01&sign=8d8612a5d698b2e570c4bcb9dac66df3&st=1657298763411&sv=100&uemps=0-0&uts=0f31TVRjBSsqndu4/jgUPz6uymy50MQJRyveme8Sk%2BCrJH14rWDnOl8gZhAbAZhHb7dPSoZ0vK100SP7LNeIh%2BlLiIGd95PPF3CvkUAWnZwGwYoOzmYC9hWXe/7CL5mNSRgr8XY/SV6TSWNAVtPJYXZfxsKCpWevGBraggJ61gA8iXE9HhEsjsB7sG2RCvV9M0OfGXYRoyW%2BuzIA%2B4iGOA%3D%3D"
 		}
 	$.post(options, (err, resp, data) => {
       try {
@@ -88,16 +89,30 @@ async function jstoken() {
         } else {
           if (safeGet(data)) {
 			data = JSON.parse(data)
-			//data = data.resultData;
-			console.log(data);//打印出待收货详情。
-			//console.log(data);//打印出需要签到的物品详情。
-			//console.log(`入账金额：${JSON.stringify(data.billAmount)}\n`);//打印入账金额
-			//console.log(`已还款：${JSON.stringify(data.payedAmt)}\n`);//打印已还款
-			//console.log(`已退款：${JSON.stringify(data.refundSdpAmt)}\n`);//打印已退款
-			//console.log(`出账日：${JSON.stringify(data.curBillDate)}\n`);//打印出账日
-			//console.log(`待还款：${JSON.stringify(data.sdpAmt)}\n`);//打印待还款
-			//console.log(`最后还款日：${JSON.stringify(data.curBillLimitDate)}\n`);//打印最后还款日
-			//message += `白条出账日：${JSON.stringify(data.curBillDate)}\n 入账金额：${JSON.stringify(data.billAmount)} 元\n 已经还款：${JSON.stringify(data.payedAmt)} 元\n 已经退款：${JSON.stringify(data.refundSdpAmt)} 元\n 待还款：${JSON.stringify(data.sdpAmt)} 元\n 最后还款日：${JSON.stringify(data.curBillLimitDate)}\n\n`
+			//console.log(data);//打印出待收货详情。
+			console.log(data.orderListRetCount);//打印出待收货个数。
+			data  = JSON.stringify(data.orderList);
+			//console.log(data);//打印出待收货商品名称
+			var obj1 = eval(data);
+			for (cishu = 0; cishu < obj1.length; cishu++) {
+			orderId	=[obj1[cishu].orderId];//打印商品ID
+			operator=[obj1[cishu].operator];//打印商品快递名称
+			jdmessage=[obj1[cishu].message];//打印商品快递信息
+			orderMsg=[obj1[cishu].orderMsg];//打印商品名称
+			orderMsg = JSON.stringify(orderMsg)//打印商品名称详情。
+			wareInfoList = JSON.stringify([obj1[cishu].orderMsg.wareInfoList]);
+			wareInfoList = JSON.stringify(wareInfoList)
+			//正则获取商品名称
+			var regex  = /[\u4e00-\u9fa5](.*)[\u4e00-\u9fa5]+/g;
+			var wname = wareInfoList.match(regex);
+			console.log('商品名称：'+wname);
+			//正则获取商品名称结束
+			console.log("商品ID："+orderId);
+			console.log("快递名称："+operator);
+			console.log("快递详情："+jdmessage);
+			console.log("商品名称详情："+wareInfoList+`\n\n`);
+			message += `商品ID：${orderId} \n 商品名称：${wname}\n 快递名称：${operator}\n 快递详情：${jdmessage} \n\n`
+			}
             if (data['retcode'] === 1001) {
               $.isLogin = false; //cookie过期
               return;
