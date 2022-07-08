@@ -98,6 +98,7 @@ async function jstoken() {
 			orderId	=[obj1[cishu].orderId];//打印商品ID
 			operator=[obj1[cishu].operator];//打印商品快递名称
 			jdmessage=[obj1[cishu].message];//打印商品快递信息
+            messageTime=[obj1[cishu].stepFloor.messageTime];//打印商品快递更新时间
 			orderMsg=[obj1[cishu].orderMsg];//打印商品名称
 			orderMsg = JSON.stringify(orderMsg)//打印商品名称详情。
 			wareInfoList = JSON.stringify([obj1[cishu].orderMsg.wareInfoList]);
@@ -110,6 +111,7 @@ async function jstoken() {
 			console.log("商品ID："+orderId+`\n`);
 			console.log("快递名称："+operator+`\n`);
 			console.log("快递详情："+jdmessage+`\n`);
+            console.log("快递更新时间："+messageTime+`\n`);
 			//console.log("商品名称详情："+wareInfoList+`\n\n`);
 			message += `商品ID：${orderId} \n 商品名称：${wname}\n 快递名称：${operator}\n 快递详情：${jdmessage} \n\n`
 			}
