@@ -105,11 +105,11 @@ async function jstoken() {
 			//正则获取商品名称
 			var regex  = /[\u4e00-\u9fa5](.*)[\u4e00-\u9fa5]+/g;
 			var wname = wareInfoList.match(regex);
-			console.log('商品名称：'+wname);
+			console.log('商品名称：'+wname+`\n`);
 			//正则获取商品名称结束
-			console.log("商品ID："+orderId);
-			console.log("快递名称："+operator);
-			console.log("快递详情："+jdmessage);
+			console.log("商品ID："+orderId+`\n`);
+			console.log("快递名称："+operator+`\n`);
+			console.log("快递详情："+jdmessage+`\n`);
 			//console.log("商品名称详情："+wareInfoList+`\n\n`);
 			message += `商品ID：${orderId} \n 商品名称：${wname}\n 快递名称：${operator}\n 快递详情：${jdmessage} \n\n`
 			}
