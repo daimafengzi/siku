@@ -20,7 +20,7 @@ export ylgy='t参数 '
  */
 
 
-const pass_num = '59999'    // 自定义通关次数.默认 10 次
+const pass_num = '999'    // 自定义通关次数.默认 10 次
 
 
 
