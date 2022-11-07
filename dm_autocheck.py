@@ -14,9 +14,9 @@ headers = {
 url = 'https://purefast.net'
 domain = url
 login_url = url+'/auth/login'
-password = '123456789'
+password = 'a123456789'
 # email = 'killercontact1740@gmail.com'
-email = 'tomxingwu.501@gmail.com'
+email = 'xiaohaizi@gmail.com'
 
 params = {
 
@@ -70,19 +70,15 @@ def customize(url):
 
 if __name__ == "__main__":
     base_url = 'https://purefast.net'
-    password = '123456789'
+    password = 'a123456789'
     # email = 'killercontact1740@gmail.com'
-    email = 'tomxingwu.501@gmail.com'
+    email = 'xiaohaizi@gmail.com'
     customize(base_url)
-    password = '123456789'
-    email = 'killercontact1740@gmail.com'
+    password = 'a123456789'
+    email = 'qinglongzhuanyong@gmail.com'
     # email = 'tomxingwu.501@gmail.com'
     customize(base_url)
     base_url = 'https://ikuuu.co'
-    password = '123456789'
-    email = 'killercontact1740@gmail.com'
-    customize(base_url)
-    email = 'tammar.ag.x.2.9.b.18@gmail.com'
-    customize(base_url)
-    email = 'tomxingw.u502@gmail.com '
+    password = 'a123456789'
+    email = 'hmily6868@gmail.com'
     customize(base_url)
