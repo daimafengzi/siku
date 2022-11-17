@@ -82,7 +82,7 @@ if __name__ == "__main__":
     email = 'qinglongzhuanyong@gmail.com'
     # email = 'tomxingwu.501@gmail.com'
     customize(base_url)
-    base_url = 'https://ikuuu.co'
+    base_url = 'https://ikuuu.dev'
     password = 'a123456789'
     email = 'hmily6868@gmail.com'
     customize(base_url)
