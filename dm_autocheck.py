@@ -2,11 +2,14 @@
 from tabnanny import check
 import requests
 from requests.packages import urllib3
+import base64
+
 urllib3.disable_warnings()
 # 模拟浏览器代理
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/82.0.4051.0 Safari/537.36 Edg/82.0.425.0'}
-
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) '
+                  'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/82.0.4051.0 Safari/537.36 Edg/82.0.425.0',
+}
 # 赋值给url
 # url = 'https://www.jiemian.com/article/6345408.html'
 # url = 'http://www.108shu.com/book/2113/479991.html' #可以爬取http协议的网站
@@ -41,7 +44,7 @@ def customize(url):
     }
     print(postdata)
     session = requests.session()
-    response = session.post(url+'/auth/login', postdata,
+    response = session.post(url + '/auth/login', postdata,
                             headers=headers, verify=False)
     # response = session.post(login_url, post_data,
     #                         headers=headers, verify=False)
@@ -64,8 +67,9 @@ def customize(url):
     response = session.post(url + '/user/checkin',
                             headers=headers, verify=False)
     print(response.text)
-    print('(============================)')
+    print('(++++++++++++++++++++++++++++++ finished)')
     # 已测试成功，可以签到。
+
 
 
 if __name__ == "__main__":
