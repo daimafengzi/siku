@@ -18,6 +18,8 @@ let productName="";//定义商品名称
 let needSignDays="";//定义需要签到总天数
 let hasSignDays="";//定义已经签到天数
 let freeAmount="";//定义签到返还金额
+let shengyucishu="";//查询剩余次数
+let chenggongjiner="";//查询签到成功总金额
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message, allMessage = '';
 if ($.isNode()) {
@@ -96,9 +98,14 @@ async function jstoken() {
           if (safeGet(data)) {
             data = JSON.parse(data);
 			//console.log(data);//打印出需要签到的物品详情--完全。
+      shengyucishu = JSON.stringify(data.data.surplusCount);
+      //console.log(shengyucishu);//打印出剩余次数。
+      chenggongjiner= JSON.stringify(data.data.sumTotalFreeAmount);
+      //console.log(chenggongjiner);//打印出签到成功总金额。
 			data = JSON.stringify(data.data.signFreeOrderInfoList);
 			data = JSON.parse(data);
 			//console.log(data);//打印出需要签到的物品详情。
+      message += `\n剩余免单次数：【${shengyucishu}次】\n签到成功总金额：【${chenggongjiner}元】\n"`
 			var obj1 = eval(data);
 			for (cishu = 0; cishu < obj1.length; cishu++) {
 			//console.log(obj1[cishu].combination);//打印对应ID是否需要签到。
@@ -151,7 +158,7 @@ function showMsg() {
     if (message) {
       allMessage += `【京东账号${$.index}】${$.nickName || $.UserName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : '\n\n'}`;
     }
-    $.msg($.name, '', `【京东账号${$.index}】${$.nickName}\n${message}`);
+    $.msg($.name, '', `【京东账号${$.index}】${$.nickName || $.UserName}\n${message}${$.index !== cookiesArr.length ? '\n\n' : '\n\n'}`);
     resolve()
   })
 }
@@ -186,7 +193,7 @@ function taskUrl() {
 			//console.log(needSignDays);
 			//console.log(hasSignDays);
 			//console.log(freeAmount);
-			console.log(productName+"\n需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果："+jieguo+"\n\n");
+			console.log(productName+"\n剩余免单次数："+shengyucishu+"\n签到成功总金额："+chenggongjiner+"\n需要签到总天数："+needSignDays+"\n 已经签到天数："+hasSignDays+"\n 签到返还金额："+freeAmount+"\n 结果："+jieguo+"\n\n");
 			message += productName + `\n 需要签到总天数`+needSignDays+`\n 已经签到天数：`+hasSignDays+`\n 签到返还金额`+freeAmount+`\n 结果：签到成功，请手动查看！\n\n`
           }
         }
